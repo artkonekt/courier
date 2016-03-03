@@ -1,0 +1,28 @@
+{
+    "name": "konekt/courier",
+    "type": "library",
+    "description": "Library dealing with integration with package delivery services",
+    "license": "MIT",
+    "keywords": ["package", "parcel", "delivery", "awb"],
+    "authors": [
+        {
+            "name": "Lajos Fazakas",
+            "homepage": "https://artkonekt.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/artkonekt/FanCourier.git"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "curier/fancourier": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Konekt\\Courier\\": ""
+        }
+    }
+}
