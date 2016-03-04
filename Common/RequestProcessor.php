@@ -12,7 +12,8 @@
 
 namespace Konekt\Courier\Common;
 
-use Exception;
+use Konekt\Courier\Common\Exception\InvalidCommandException;
+use Konekt\Courier\Common\Exception\InvalidResponseException;
 
 /**
  * The top level class which turns the courier requests into responses. This should be used in client codes.
@@ -39,8 +40,10 @@ final class RequestProcessor
      *
      * @param RequestInterface $request
      *
-     * @return ResponseInterface
-     * @throws Exception
+     * @return \Konekt\Courier\Common\ResponseInterface
+     *
+     * @throws \Konekt\Courier\Common\Exception\InvalidCommandException
+     * @throws \Konekt\Courier\Common\Exception\InvalidResponseException
      */
     public function process(RequestInterface $request)
     {

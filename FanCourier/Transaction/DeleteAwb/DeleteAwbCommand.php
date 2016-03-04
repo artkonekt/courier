@@ -13,9 +13,8 @@
 namespace Konekt\Courier\FanCourier\Transaction\DeleteAwb;
 
 use FanCourier\fanCourier;
-use Konekt\Courier\Common\InvalidRequestException;
+use Konekt\Courier\Common\Exception\InvalidRequestException;
 use Konekt\Courier\Common\RequestInterface;
-use Konekt\Courier\Common\ResponseInterface;
 use Konekt\Courier\FanCourier\Transaction\AbstractCommand;
 
 /**
@@ -28,8 +27,9 @@ class DeleteAwbCommand extends AbstractCommand
      *
      * @param RequestInterface $request
      *
-     * @return ResponseInterface
-     * @throws InvalidRequestException
+     * @return \Konekt\Courier\Common\ResponseInterface
+     *
+     * @throws \Konekt\Courier\FanCourier\Transaction\DeleteAwb\InvalidRequestException
      */
     public function handle(RequestInterface $request)
     {

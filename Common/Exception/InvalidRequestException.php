@@ -11,7 +11,7 @@
  * @version     2016-03-04
  */
 
-namespace Konekt\Courier\Common;
+namespace Konekt\Courier\Common\Exception;
 
 class InvalidRequestException extends \Exception
 {

@@ -15,7 +15,7 @@ namespace Konekt\Courier\FanCourier\Transaction\CreateAwb;
 use Exception;
 use FanCourier\fanCourier;
 use FanCourier\Plugin\csv\csvItem;
-use Konekt\Courier\Common\InvalidRequestException;
+use Konekt\Courier\Common\Exception\InvalidRequestException;
 use Konekt\Courier\Common\RequestInterface;
 use Konekt\Courier\FanCourier\Package;
 use Konekt\Courier\FanCourier\Transaction\AbstractCommand;
@@ -32,9 +32,9 @@ class CreateAwbCommand extends AbstractCommand
      *
      * @param RequestInterface $request
      *
-     * @throws InvalidRequestException
+     * @return \Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbResponse
      *
-     * @return CreateAwbResponse
+     * @throws \Konekt\Courier\FanCourier\Transaction\CreateAwb\InvalidRequestException
      */
     public function handle(RequestInterface $request)
     {
