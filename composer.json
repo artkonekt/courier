@@ -12,8 +12,15 @@
     ],
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/artkonekt/FanCourier.git"
+            "type": "package",
+            "package": {
+                "name": "curier/fancourier",
+                "version": "dev-fork",
+                "source": {
+                    "url": "https://github.com/artkonekt/FanCourier.git",
+                    "type": "git"
+                }
+            }
         }
     ],
     "require": {
