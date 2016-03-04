@@ -15,5 +15,19 @@ namespace Konekt\Courier\Common;
 
 class InvalidRequestException extends \Exception
 {
+    /**
+     * @var mixed
+     */
+    private $object;
 
+    /**
+     * InvalidRequestException constructor.
+     *
+     * @param mixed $object
+     */
+    public function __construct($object)
+    {
+        $this->object = $object;
+        $this->message = sprinf('Request should be a RequestInterface %s given', get_class($this->object));
+    }
 }

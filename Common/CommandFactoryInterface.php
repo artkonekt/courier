@@ -18,7 +18,7 @@ namespace Konekt\Courier\Common;
 interface CommandFactoryInterface
 {
     /**
-     * Creates a command which handles the request.
+     * Creates the command which handles the request.
      *
      * @param RequestInterface $request
      *
