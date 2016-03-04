@@ -26,7 +26,7 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "curier/fancourier": "~1.0"
+        "curier/fancourier": "dev-master"
     },
     "autoload": {
         "psr-4": {
