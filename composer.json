@@ -12,21 +12,13 @@
     ],
     "repositories": [
         {
-            "type": "package",
-            "package": {
-                "name": "curier/fancourier",
-                "version": "dev-master",
-                "source": {
-                    "url": "https://github.com/artkonekt/FanCourier.git",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        }
+            "type": "vcs",
+            "url": "https://github.com/artkonekt/FanCourier.git"
+        },
     ],
     "require": {
         "php": ">=5.5.9",
-        "curier/fancourier": "dev-master"
+        "curier/fancourier": "dev-fork"
     },
     "autoload": {
         "psr-4": {
