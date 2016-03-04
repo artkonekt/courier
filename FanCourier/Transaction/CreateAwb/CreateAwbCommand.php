@@ -19,6 +19,7 @@ use Konekt\Courier\Common\InvalidRequestException;
 use Konekt\Courier\Common\RequestInterface;
 use Konekt\Courier\FanCourier\Package;
 use Konekt\Courier\FanCourier\Transaction\AbstractCommand;
+use Konekt\Courier\FanCourier\Transaction\CreateAwb\Response\Factory;
 
 /**
  * Command class dealing with the AWB creation.
@@ -41,24 +42,19 @@ class CreateAwbCommand extends AbstractCommand
             throw new InvalidRequestException('The request should be a CreateAwbRequest');
         }
 
-        try {
+        $params = $this->getAuthParams();
 
-            $params = $this->getAuthParams();
+        $fc = new fanCourier();
+        $endpoint = $fc->getEndpoint('awbGenerator');
+        $endpoint->createFile();
 
-            $fc = new fanCourier();
-            $endpoint = $fc->getEndpoint('awbGenerator');
-            $endpoint->createFile();
+        $item = $this->createCsvItem($request->getPackage());
+        $endpoint->addNewItem($item);
 
-            $item = $this->createCsvItem($request->getPackage());
-            $endpoint->addNewItem($item);
+        $params['fisier'] = $endpoint->getFile();
+        $endpoint->setParams($params);
 
-            $params['fisier'] = $endpoint->getFile();
-            $endpoint->setParams($params);
-
-            $results = CreateAwbResponse::createFromApiResponse($endpoint->getResult());
-        } catch (Exception $exc) {
-            $results = CreateAwbResponse::createFromException($exc);
-        }
+        $results = Factory::createResponse($endpoint->getResult());
 
         return $results[0];
     }
@@ -85,9 +81,10 @@ class CreateAwbCommand extends AbstractCommand
      */
     private function toArray(Package $package)
     {
-        $array = (array) $package;
+        $array = (array)$package;
         $array['judet'] = $this->unaccent($package->judet);
         $array['localitate'] = $this->unaccent($package->localitate);
+
         return $array;
     }
 
@@ -101,6 +98,7 @@ class CreateAwbCommand extends AbstractCommand
     private function unaccent($string)
     {
         $accentMap = ['ă' => 'a', 'â' => 'a', 'î' => 'i', 'ț' => 't', 'ș' => 's'];
+
         return strtr($string, $accentMap);
     }
 }
