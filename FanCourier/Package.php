@@ -2,10 +2,10 @@
 /**
  * Contains class Awb
  *
- * @package     CourierBundle
+ * @package     Konekt\Courier\FanCourier
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
- * @author      Lajos Fazakas <lajos@artkonekt.com>
- * @license     Proprietary
+ * @author      Lajos Fazakas
+ * @license     MIT
  * @since       2016-02-24
  * @version     2016-02-24
  */
