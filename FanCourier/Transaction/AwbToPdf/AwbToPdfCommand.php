@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains class AwbPdfCommand
+ * Contains class AwbToPdfCommand
  *
  * @package     Konekt\Courier\FanCourier
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
@@ -10,7 +10,7 @@
  * @version     2016-03-04
  */
 
-namespace Konekt\Courier\FanCourier\Transaction\AwbPdf;
+namespace Konekt\Courier\FanCourier\Transaction\AwbToPdf;
 
 use FanCourier\fanCourier;
 use Konekt\Courier\Common\RequestInterface;
@@ -19,14 +19,14 @@ use Konekt\Courier\FanCourier\Transaction\AbstractCommand;
 /**
  * Command class dealing with the AWB label generation in PDF format.
  */
-class AwbPdfCommand extends AbstractCommand
+class AwbToPdfCommand extends AbstractCommand
 {
     /**
      * Creates an PDF label of the specified AWB with the help of the fanCourier library and returns the response.
      *
      * @param RequestInterface $request
      *
-     * @return AwbPdfResponse
+     * @return AwbToPdfResponse
      */
     public function handle(RequestInterface $request)
     {
@@ -42,6 +42,6 @@ class AwbPdfCommand extends AbstractCommand
         $params['type'] = $request->getType(); // Optional -> 0 or 1, if page A6 type=1
         $endpoint->setParams($params);
 
-        return new AwbPdfResponse($endpoint->getResult());
+        return new AwbToPdfResponse($endpoint->getResult());
     }
 }

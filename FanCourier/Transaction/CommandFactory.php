@@ -17,10 +17,10 @@ use Konekt\Courier\Common\CommandFactoryInterface;
 use Konekt\Courier\Common\CommandInterface;
 use Konekt\Courier\Common\RequestInterface;
 use Konekt\Courier\FanCourier\ApiCredentials;
-use Konekt\Courier\FanCourier\Transaction\AwbHtml\AwbHtmlCommand;
-use Konekt\Courier\FanCourier\Transaction\AwbHtml\AwbHtmlRequest;
-use Konekt\Courier\FanCourier\Transaction\AwbPdf\AwbPdfCommand;
-use Konekt\Courier\FanCourier\Transaction\AwbPdf\AwbPdfRequest;
+use Konekt\Courier\FanCourier\Transaction\AwbToHtml\AwbToHtmlCommand;
+use Konekt\Courier\FanCourier\Transaction\AwbToHtml\AwbToHtmlRequest;
+use Konekt\Courier\FanCourier\Transaction\AwbToPdf\AwbToPdfCommand;
+use Konekt\Courier\FanCourier\Transaction\AwbToPdf\AwbToPdfRequest;
 use Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbCommand;
 use Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbRequest;
 use Konekt\Courier\FanCourier\Transaction\DeleteAwb\DeleteAwbCommand;
@@ -57,12 +57,12 @@ class CommandFactory implements CommandFactoryInterface
      */
     public function createCommand(RequestInterface $request)
     {
-        if ($request instanceof AwbPdfRequest) {
-            $command = new AwbPdfCommand($this->apiCredentials);
+        if ($request instanceof AwbToPdfRequest) {
+            $command = new AwbToPdfCommand($this->apiCredentials);
         } elseif ($request instanceof CreateAwbRequest) {
             $command = new CreateAwbCommand($this->apiCredentials);
-        } elseif ($request instanceof AwbHtmlRequest) {
-            $command = new AwbHtmlCommand($this->apiCredentials);
+        } elseif ($request instanceof AwbToHtmlRequest) {
+            $command = new AwbToHtmlCommand($this->apiCredentials);
         } elseif ($request instanceof DeleteAwbRequest) {
             $command = new DeleteAwbCommand($this->apiCredentials);
         } else {

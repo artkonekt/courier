@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains class AwbPdfRequest
+ * Contains class AwbToPdfRequest
  *
  * @package     Konekt\Courier\FanCourier
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
@@ -10,14 +10,14 @@
  * @version     2016-03-02
  */
 
-namespace Konekt\Courier\FanCourier\Transaction\AwbPdf;
+namespace Konekt\Courier\FanCourier\Transaction\AwbToPdf;
 
 use Konekt\Courier\Common\RequestInterface;
 
 /**
  * Request class abstracting the AWB PDF label generation request.
  */
-class AwbPdfRequest implements RequestInterface
+class AwbToPdfRequest implements RequestInterface
 {
     //Pdf page type: A4,A5,A6
     const PAGE_A4 = 'A4';
@@ -44,7 +44,7 @@ class AwbPdfRequest implements RequestInterface
     private $type = self::TYPE_DEFAULT;
 
     /**
-     * AwbPdfRequest constructor.
+     * AwbToPdfRequest constructor.
      *
      * @param string $awbNumber
      */
@@ -58,7 +58,7 @@ class AwbPdfRequest implements RequestInterface
      *
      * @param string $page
      *
-     * @return AwbPdfRequest
+     * @return AwbToPdfRequest
      */
     public function setPage($page)
     {
@@ -74,7 +74,7 @@ class AwbPdfRequest implements RequestInterface
     /**
      * @param string $type
      *
-     * @return AwbPdfRequest
+     * @return AwbToPdfRequest
      */
     public function setType($type)
     {

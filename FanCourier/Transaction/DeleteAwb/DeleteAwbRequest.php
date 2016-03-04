@@ -25,7 +25,7 @@ class DeleteAwbRequest implements RequestInterface
     private $awbNumber;
 
     /**
-     * AwbPdfRequest constructor.
+     * AwbToPdfRequest constructor.
      *
      * @param string $awbNumber
      */

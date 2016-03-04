@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains class AwbHtmlRequest
+ * Contains class AwbToHtmlRequest
  *
  * @package     Konekt\Courier\FanCourier
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
@@ -10,14 +10,14 @@
  * @version     2016-03-04
  */
 
-namespace Konekt\Courier\FanCourier\Transaction\AwbHtml;
+namespace Konekt\Courier\FanCourier\Transaction\AwbToHtml;
 
 use Konekt\Courier\Common\RequestInterface;
 
 /**
  * Request class abstracting the AWB HTML label generation request.
  */
-class AwbHtmlRequest implements RequestInterface
+class AwbToHtmlRequest implements RequestInterface
 {
     const TYPE_DEFAULT = null;
     const TYPE_A6 = 2;
@@ -30,7 +30,7 @@ class AwbHtmlRequest implements RequestInterface
     private $type = self::TYPE_DEFAULT;
 
     /**
-     * AwbHtmlRequest constructor.
+     * AwbToHtmlRequest constructor.
      *
      * @param string $awbNumber
      */

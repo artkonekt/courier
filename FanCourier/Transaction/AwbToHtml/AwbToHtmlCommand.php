@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains class AwbHtmlCommand
+ * Contains class AwbToHtmlCommand
  *
  * @package     Konekt\Courier\FanCourier
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
@@ -10,7 +10,7 @@
  * @version     2016-03-04
  */
 
-namespace Konekt\Courier\FanCourier\Transaction\AwbHtml;
+namespace Konekt\Courier\FanCourier\Transaction\AwbToHtml;
 
 use FanCourier\fanCourier;
 use Konekt\Courier\Common\RequestInterface;
@@ -19,14 +19,14 @@ use Konekt\Courier\FanCourier\Transaction\AbstractCommand;
 /**
  * Command class dealing with the AWB label generation in HTML format.
  */
-class AwbHtmlCommand extends AbstractCommand
+class AwbToHtmlCommand extends AbstractCommand
 {
     /**
      * Creates an HTML label of the specified AWB with the help of the fanCourier library and returns the response.
      *
      * @param RequestInterface $request
      *
-     * @return AwbHtmlResponse
+     * @return AwbToHtmlResponse
      */
     public function handle(RequestInterface $request)
     {
@@ -40,6 +40,6 @@ class AwbHtmlCommand extends AbstractCommand
         $params['type'] = $request->getType();
         $endpoint->setParams($params);
 
-        return new AwbHtmlResponse($endpoint->getResult());
+        return new AwbToHtmlResponse($endpoint->getResult());
     }
 }

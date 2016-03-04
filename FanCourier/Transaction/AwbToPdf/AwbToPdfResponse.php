@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains class AwbHtmlResponse
+ * Contains class AwbToPdfResponse
  *
  * @package     Konekt\Courier\FanCourier
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
@@ -10,14 +10,14 @@
  * @version     2016-03-04
  */
 
-namespace Konekt\Courier\FanCourier\Transaction\AwbHtml;
+namespace Konekt\Courier\FanCourier\Transaction\AwbToPdf;
 
 use Konekt\Courier\Common\ResponseInterface;
 
 /**
- * Response class abstracting the AWB HTML label creation response.
+ * Response class abstracting the AWB PDF label creation response.
  */
-class AwbHtmlResponse implements ResponseInterface
+class AwbToPdfResponse implements ResponseInterface
 {
     /**
      * @var string
@@ -25,7 +25,7 @@ class AwbHtmlResponse implements ResponseInterface
     private $response;
 
     /**
-     * AwbHtmlResponse constructor.
+     * AwbToPdfResponse constructor.
      *
      * @param string $response
      */
@@ -35,11 +35,11 @@ class AwbHtmlResponse implements ResponseInterface
     }
 
     /**
-     * Returns the HTML.
+     * Returns the PDF.
      *
-     * @return mixed
+     * @return string
      */
-    public function getHtml()
+    public function getPdf()
     {
         return $this->response;
     }
