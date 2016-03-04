@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains class Awb
+ * Contains class Package
  *
  * @package     Konekt\Courier\FanCourier
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
@@ -12,7 +12,7 @@
 
 namespace Konekt\Courier\FanCourier;
 
-use FanCourier\Plugin\csv\csvItem;
+//use FanCourier\Plugin\csv\csvItem;
 
 class Package
 {
@@ -61,25 +61,25 @@ class Package
 
     public $date_personale;
 
-    public static function createCsvItem(Package $awb)
-    {
-        $item = csvItem::newItem();
-        $item->setItems($awb->toArray());
-
-        return $item;
-    }
-
-    private function unaccent($string)
-    {
-        $accentMap = ['ă' => 'a', 'â' => 'a', 'î' => 'i', 'ț' => 't', 'ș' => 's'];
-        return strtr($string, $accentMap);
-    }
-
-    public function toArray()
-    {
-        $array = (array) $this;
-        $array['judet'] = $this->unaccent($this->judet);
-        $array['localitate'] = $this->unaccent($this->localitate);
-        return $array;
-    }
+    //public static function createCsvItem(Package $awb)
+    //{
+    //    $item = csvItem::newItem();
+    //    $item->setItems($awb->toArray());
+    //
+    //    return $item;
+    //}
+    //
+    //private function unaccent($string)
+    //{
+    //    $accentMap = ['ă' => 'a', 'â' => 'a', 'î' => 'i', 'ț' => 't', 'ș' => 's'];
+    //    return strtr($string, $accentMap);
+    //}
+    //
+    //public function toArray()
+    //{
+    //    $array = (array) $this;
+    //    $array['judet'] = $this->unaccent($this->judet);
+    //    $array['localitate'] = $this->unaccent($this->localitate);
+    //    return $array;
+    //}
 }

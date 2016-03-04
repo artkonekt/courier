@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains class AwbPdf
+ * Contains class AwbPdfRequest
  *
  * @package     Konekt\Courier\FanCourier
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
@@ -10,11 +10,11 @@
  * @version     2016-03-02
  */
 
-namespace Konekt\Courier\FanCourier;
+namespace Konekt\Courier\FanCourier\Transaction\AwbPdf;
 
-use FanCourier\fanCourier;
+use Konekt\Courier\Common\RequestInterface;
 
-class AwbPdf extends AbstractCommand
+class AwbPdfRequest implements RequestInterface
 {
     //Pdf page type: A4,A5,A6
     const PAGE_A4 = 'A4';
@@ -25,31 +25,21 @@ class AwbPdf extends AbstractCommand
     const TYPE_DEFAULT = '0';
     const TYPE_A6 = '1';
 
+    private $awbNumber;
+
     private $page = self::PAGE_A5;
 
     private $type = self::TYPE_DEFAULT;
 
-    public function getPdf($awbNumber)
+    public function __construct($awbNumber)
     {
-        $params = $this->getAuthParams();
-        $params['nr'] = $awbNumber;
-
-        $fc = new fanCourier();
-        $endpoint = $fc->getEndpoint('printAwb');
-
-        //PDF
-        $endpoint->setType('pdf');
-        $params['page'] = $this->page; // Optional -> Pdf page type: A4,A5,A6
-        $params['type'] = $this->type; // Optional -> 0 or 1, if page A6 type=1
-        $endpoint->setParams($params);
-
-        return $endpoint->getResult();
+        $this->awbNumber = $awbNumber;
     }
 
     /**
      * @param string $page
      *
-     * @return AwbPdf
+     * @return AwbPdfRequest
      */
     public function setPage($page)
     {
@@ -65,7 +55,7 @@ class AwbPdf extends AbstractCommand
     /**
      * @param string $type
      *
-     * @return AwbPdf
+     * @return AwbPdfRequest
      */
     public function setType($type)
     {
@@ -77,4 +67,30 @@ class AwbPdf extends AbstractCommand
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAwbNumber()
+    {
+        return $this->awbNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+
 }

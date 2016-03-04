@@ -10,19 +10,22 @@
  * @version     2016-03-02
  */
 
-namespace Konekt\Courier\FanCourier;
+namespace Konekt\Courier\FanCourier\Transaction;
+
+use Konekt\Courier\Common\CommandInterface;
+use Konekt\Courier\FanCourier\ApiCredentials;
 
 /**
  * Class AbstractCommand
  *
  * @package Konekt\Courier\FanCourier
  */
-class AbstractCommand
+abstract class AbstractCommand implements CommandInterface
 {
     /**
      * @var \Konekt\Courier\FanCourier\ApiCredentials
      */
-    private $credentials;
+    protected $credentials;
 
     /**
      * AbstractCommand constructor.

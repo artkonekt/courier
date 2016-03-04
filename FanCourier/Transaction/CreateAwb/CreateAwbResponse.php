@@ -1,19 +1,21 @@
 <?php
 /**
- * Contains class AwbCreationResult
+ * Contains class CreateAwbResponse
  *
  * @package     Konekt\Courier\FanCourier
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
  * @author      Lajos Fazakas
  * @license     MIT
- * @since       2016-02-25
- * @version     2016-02-25
+ * @since       2016-03-04
+ * @version     2016-03-04
  */
 
-namespace Konekt\Courier\FanCourier;
+namespace Konekt\Courier\FanCourier\Transaction\CreateAwb;
 
 
-class AwbCreationResult
+use Konekt\Courier\Common\ResponseInterface;
+
+class CreateAwbResponse implements ResponseInterface
 {
     private $lineNumber;
 

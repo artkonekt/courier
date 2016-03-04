@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains interface PackageMapper
+ * Contains interface PackagePopulatorInterface
  *
  * @package     Konekt\Courier\FanCourier
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
