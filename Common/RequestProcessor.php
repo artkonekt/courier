@@ -47,13 +47,13 @@ final class RequestProcessor
         $command = $this->commandFactory->createCommand($request);
 
         if (!$command instanceof CommandInterface) {
-            throw new Exception('The command should be of type CommandInterface');
+            throw new InvalidCommandException('The command should be of type CommandInterface');
         }
 
         $response = $command->handle($request);
 
         if (!$response instanceof ResponseInterface) {
-            throw new Exception('The response should be of type ResponseInterface');
+            throw new InvalidResponseException('The response should be of type ResponseInterface');
         }
 
         return $response;
