@@ -56,7 +56,7 @@ class CreateAwbCommand extends AbstractCommand
 
     private function toArray(Package $package)
     {
-        $array = (array) $this;
+        $array = (array) $package;
         $array['judet'] = $this->unaccent($package->judet);
         $array['localitate'] = $this->unaccent($package->localitate);
         return $array;
