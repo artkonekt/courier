@@ -13,18 +13,32 @@
 namespace Konekt\Courier\FanCourier\Transaction\CreateAwb;
 
 use Konekt\Courier\Common\RequestInterface;
+use Konekt\Courier\FanCourier\Package;
 
+/**
+ * Request class abstracting the awb creation request.
+ */
 class CreateAwbRequest implements RequestInterface
 {
+    /**
+     * @var Package
+     */
     private $package;
 
-    public function __construct($package)
+    /**
+     * CreateAwbRequest constructor.
+     *
+     * @param Package $package
+     */
+    public function __construct(Package $package)
     {
         $this->package = $package;
     }
 
     /**
-     * @return mixed
+     * Returns the package object based for which the AWB should be created.
+     *
+     * @return Package
      */
     public function getPackage()
     {

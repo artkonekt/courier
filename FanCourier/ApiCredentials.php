@@ -12,21 +12,32 @@
 
 namespace Konekt\Courier\FanCourier;
 
-
+/**
+ * Class abstracting the credentials needed by the FanCourier API.
+ */
 class ApiCredentials
 {
+    /**
+     * @var string
+     */
     private $username;
 
+    /**
+     * @var string
+     */
     private $password;
 
+    /**
+     * @var string
+     */
     private $clientId;
 
     /**
      * ApiCredentials constructor.
      *
-     * @param $username
-     * @param $password
-     * @param $clientId
+     * @param string $username
+     * @param string $password
+     * @param string $clientId
      */
     public function __construct($username, $password, $clientId)
     {
@@ -36,6 +47,8 @@ class ApiCredentials
     }
 
     /**
+     * Returns the username.
+     *
      * @return mixed
      */
     public function getUsername()
@@ -44,6 +57,8 @@ class ApiCredentials
     }
 
     /**
+     * Returns the password.
+     *
      * @return mixed
      */
     public function getPassword()
@@ -52,6 +67,8 @@ class ApiCredentials
     }
 
     /**
+     * Returns the client ID.
+     *
      * @return mixed
      */
     public function getClientId()

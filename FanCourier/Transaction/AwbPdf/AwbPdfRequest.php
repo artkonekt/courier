@@ -14,6 +14,9 @@ namespace Konekt\Courier\FanCourier\Transaction\AwbPdf;
 
 use Konekt\Courier\Common\RequestInterface;
 
+/**
+ * Request class abstracting the AWB PDF label generation request.
+ */
 class AwbPdfRequest implements RequestInterface
 {
     //Pdf page type: A4,A5,A6
@@ -25,18 +28,34 @@ class AwbPdfRequest implements RequestInterface
     const TYPE_DEFAULT = '0';
     const TYPE_A6 = '1';
 
+    /**
+     * @var string
+     */
     private $awbNumber;
 
+    /**
+     * @var string
+     */
     private $page = self::PAGE_A5;
 
+    /**
+     * @var string
+     */
     private $type = self::TYPE_DEFAULT;
 
+    /**
+     * AwbPdfRequest constructor.
+     *
+     * @param string $awbNumber
+     */
     public function __construct($awbNumber)
     {
         $this->awbNumber = $awbNumber;
     }
 
     /**
+     * Sets the page size of the label.
+     *
      * @param string $page
      *
      * @return AwbPdfRequest
@@ -69,6 +88,8 @@ class AwbPdfRequest implements RequestInterface
     }
 
     /**
+     * Returns the number of the AWB.
+     *
      * @return mixed
      */
     public function getAwbNumber()
@@ -77,6 +98,8 @@ class AwbPdfRequest implements RequestInterface
     }
 
     /**
+     * Returns the page size of the label.
+     *
      * @return string
      */
     public function getPage()
@@ -91,6 +114,4 @@ class AwbPdfRequest implements RequestInterface
     {
         return $this->type;
     }
-
-
 }

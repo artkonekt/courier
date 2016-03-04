@@ -16,8 +16,18 @@ use FanCourier\fanCourier;
 use Konekt\Courier\Common\RequestInterface;
 use Konekt\Courier\FanCourier\Transaction\AbstractCommand;
 
+/**
+ * Command class dealing with the AWB label generation in PDF format.
+ */
 class AwbPdfCommand extends AbstractCommand
 {
+    /**
+     * Creates an PDF label of the specified AWB with the help of the fanCourier library and returns the response.
+     *
+     * @param RequestInterface $request
+     *
+     * @return AwbPdfResponse
+     */
     public function handle(RequestInterface $request)
     {
         $params = $this->getAuthParams();

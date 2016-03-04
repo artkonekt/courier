@@ -16,27 +16,32 @@ use Konekt\Courier\Common\CommandInterface;
 use Konekt\Courier\FanCourier\ApiCredentials;
 
 /**
- * Class AbstractCommand
+ * Class AbstractCommand providing common data and functionality for all Fancourier commands.
  *
  * @package Konekt\Courier\FanCourier
  */
 abstract class AbstractCommand implements CommandInterface
 {
     /**
-     * @var \Konekt\Courier\FanCourier\ApiCredentials
+     * @var ApiCredentials
      */
     protected $credentials;
 
     /**
      * AbstractCommand constructor.
      *
-     * @param \Konekt\Courier\FanCourier\ApiCredentials $credentials
+     * @param ApiCredentials $credentials
      */
     public function __construct(ApiCredentials $credentials)
     {
         $this->credentials = $credentials;
     }
 
+    /**
+     * Turns the credentials object into a format needed by the Fancourier API.
+     *
+     * @return array
+     */
     protected function getAuthParams()
     {
         $credentials = $this->credentials;

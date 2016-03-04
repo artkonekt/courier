@@ -12,18 +12,35 @@
 
 namespace Konekt\Courier\FanCourier\Transaction\CreateAwb;
 
-
-use Konekt\Courier\Common\RequestInterface;
-use Konekt\Courier\FanCourier\Package;
+use Exception;
 use FanCourier\fanCourier;
 use FanCourier\Plugin\csv\csvItem;
+use Konekt\Courier\Common\InvalidRequestException;
+use Konekt\Courier\Common\RequestInterface;
+use Konekt\Courier\FanCourier\Package;
 use Konekt\Courier\FanCourier\Transaction\AbstractCommand;
 
+/**
+ * Command class dealing with the AWB creation.
+ */
 class CreateAwbCommand extends AbstractCommand
 {
-
+    /**
+     * Creates an AWB based on the data of the request with the help of the fanCourier library and
+     * returns the response.
+     *
+     * @param RequestInterface $request
+     *
+     * @throws InvalidRequestException
+     *
+     * @return CreateAwbResponse
+     */
     public function handle(RequestInterface $request)
     {
+        if (!$request instanceof CreateAwbRequest) {
+            throw new InvalidRequestException('The request should be a CreateAwbRequest');
+        }
+
         try {
 
             $params = $this->getAuthParams();
@@ -39,13 +56,18 @@ class CreateAwbCommand extends AbstractCommand
             $endpoint->setParams($params);
 
             $results = CreateAwbResponse::createFromApiResponse($endpoint->getResult());
-        } catch (\Exception $exc) {
+        } catch (Exception $exc) {
             $results = CreateAwbResponse::createFromException($exc);
         }
 
         return $results[0];
     }
 
+    /**
+     * @param Package $package
+     *
+     * @return csvItem
+     */
     private function createCsvItem(Package $package)
     {
         $item = csvItem::newItem();
@@ -54,6 +76,13 @@ class CreateAwbCommand extends AbstractCommand
         return $item;
     }
 
+    /**
+     * Turns the package into a format needed by the Fancourier API.
+     *
+     * @param Package $package
+     *
+     * @return array
+     */
     private function toArray(Package $package)
     {
         $array = (array) $package;
@@ -62,6 +91,13 @@ class CreateAwbCommand extends AbstractCommand
         return $array;
     }
 
+    /**
+     * Removes romanian accent from a string. Fancourier API needs this normalization for some parameters.
+     *
+     * @param $string
+     *
+     * @return string
+     */
     private function unaccent($string)
     {
         $accentMap = ['ă' => 'a', 'â' => 'a', 'î' => 'i', 'ț' => 't', 'ș' => 's'];

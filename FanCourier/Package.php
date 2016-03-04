@@ -12,8 +12,9 @@
 
 namespace Konekt\Courier\FanCourier;
 
-//use FanCourier\Plugin\csv\csvItem;
-
+/**
+ * Class Package abstracting package data needed for AWB creation.
+ */
 class Package
 {
     public $tip;
@@ -60,26 +61,4 @@ class Package
     public $packing;
 
     public $date_personale;
-
-    //public static function createCsvItem(Package $awb)
-    //{
-    //    $item = csvItem::newItem();
-    //    $item->setItems($awb->toArray());
-    //
-    //    return $item;
-    //}
-    //
-    //private function unaccent($string)
-    //{
-    //    $accentMap = ['ă' => 'a', 'â' => 'a', 'î' => 'i', 'ț' => 't', 'ș' => 's'];
-    //    return strtr($string, $accentMap);
-    //}
-    //
-    //public function toArray()
-    //{
-    //    $array = (array) $this;
-    //    $array['judet'] = $this->unaccent($this->judet);
-    //    $array['localitate'] = $this->unaccent($this->localitate);
-    //    return $array;
-    //}
 }

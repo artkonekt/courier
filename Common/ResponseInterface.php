@@ -12,8 +12,7 @@
 
 namespace Konekt\Courier\Common;
 
-
-interface ResponseInterface
-{
-
-}
+/**
+ * Interface for all responses.
+ */
+interface ResponseInterface {}

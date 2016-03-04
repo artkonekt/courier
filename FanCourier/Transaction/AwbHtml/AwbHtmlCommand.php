@@ -16,8 +16,18 @@ use FanCourier\fanCourier;
 use Konekt\Courier\Common\RequestInterface;
 use Konekt\Courier\FanCourier\Transaction\AbstractCommand;
 
+/**
+ * Command class dealing with the AWB label generation in HTML format.
+ */
 class AwbHtmlCommand extends AbstractCommand
 {
+    /**
+     * Creates an HTML label of the specified AWB with the help of the fanCourier library and returns the response.
+     *
+     * @param RequestInterface $request
+     *
+     * @return AwbHtmlResponse
+     */
     public function handle(RequestInterface $request)
     {
         $params = $this->getAuthParams();

@@ -13,9 +13,16 @@
 namespace Konekt\Courier\Common;
 
 /**
- * Interface CommandInterface
+ * Interface for all commands.
  */
 interface CommandInterface
 {
+    /**
+     * Takes a request and turns it into a response.
+     *
+     * @param RequestInterface $request
+     *
+     * @return ResponseInterface
+     */
     public function handle(RequestInterface $request);
 }
