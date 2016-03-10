@@ -22,6 +22,7 @@ class ApiCredentials
      */
     private $username;
 
+
     /**
      * @var string
      */
