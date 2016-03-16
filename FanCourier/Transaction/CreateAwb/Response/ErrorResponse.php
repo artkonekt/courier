@@ -2,7 +2,7 @@
 /**
  * Contains class CreateAwbErrorResponse
  *
- * @package     Konekt\Courier\FanCourier\Transaction\CreateAwb
+ * @package     Konekt\Courier\FanCourier
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
  * @author      Lajos Fazakas
  * @license     MIT
@@ -13,14 +13,15 @@
 namespace Konekt\Courier\FanCourier\Transaction\CreateAwb\Response;
 
 /**
- * Response class abstracting the AWB creation error response.
+ * Response class abstracting the AWB creation error response. The error message represent the error of a single AWB
+ * creation. The line number specifies for which one.
  */
 class ErrorResponse extends AbstractResponse
 {
     /**
      * @var string
      */
-    private $errorMessage;
+    protected $errorMessage;
 
     /**
      * CreateAwbErrorResponse constructor.

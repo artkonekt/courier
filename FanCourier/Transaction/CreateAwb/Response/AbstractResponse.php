@@ -2,7 +2,7 @@
 /**
  * Contains class AbstractResponse
  *
- * @package     Konekt\Courier\FanCourier\Transaction\CreateAwb\Response
+ * @package     Konekt\Courier\FanCourier
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
  * @author      Lajos Fazakas
  * @license     MIT
@@ -13,12 +13,13 @@
 namespace Konekt\Courier\FanCourier\Transaction\CreateAwb\Response;
 
 
-use Konekt\Courier\Common\ResponseInterface;
+use Konekt\Courier\Common\Response\StatusAwareResponse;
+use Konekt\Courier\Common\Response\StatusAwareResponseInterface;
 
 /**
  * Class AbstractResponse
  */
-abstract class AbstractResponse implements ResponseInterface
+abstract class AbstractResponse implements StatusAwareResponseInterface
 {
     /**
      * @var string
@@ -34,11 +35,4 @@ abstract class AbstractResponse implements ResponseInterface
     {
         return (int) $this->lineNumber;
     }
-
-    /**
-     * Returns whether the response is a successful one.
-     *
-     * @return bool
-     */
-    abstract public function isSuccess();
 }

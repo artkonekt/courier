@@ -2,7 +2,7 @@
 /**
  * Contains class Factory
  *
- * @package     Konekt\Courier\FanCourier\Transaction\CreateAwb\Response
+ * @package     Konekt\Courier\FanCourier
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
  * @author      Lajos Fazakas
  * @license     MIT
@@ -12,6 +12,7 @@
 
 namespace Konekt\Courier\FanCourier\Transaction\CreateAwb\Response;
 use Exception;
+use Konekt\Courier\FanCourier\GenericErrorResponse;
 
 /**
  * Factory class for creating the right response objects.
@@ -35,7 +36,7 @@ class Factory
 
             if (1 == count($parts)) {
                 //some generic API error: ie. authentication username is not correct
-                throw new Exception($rawApiResponse[0]);
+                $result = new GenericErrorResponse($rawApiResponse[0]);
             } elseif (0 == $parts[1]) {
                 //the API call was successful, but there are errors in the posted data
                 $result = new ErrorResponse($parts[0], $parts[2]);

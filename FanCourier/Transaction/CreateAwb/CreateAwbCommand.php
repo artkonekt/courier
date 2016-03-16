@@ -12,6 +12,7 @@
 
 namespace Konekt\Courier\FanCourier\Transaction\CreateAwb;
 
+use Konekt\Courier\Common\Response\StatusAwareResponseInterface;
 use Konekt\Courier\FanCourier\Utils\StringNormalizer;
 use FanCourier\fanCourier;
 use FanCourier\Plugin\csv\csvItem;
@@ -32,7 +33,7 @@ class CreateAwbCommand extends AbstractCommand
      *
      * @param RequestInterface $request
      *
-     * @return \Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbResponse
+     * @return StatusAwareResponseInterface
      * @throws \Exception
      * @throws \FanCourier\Plugin\Exeption\fcApiExeption
      * @throws \Konekt\Courier\Common\Exception\InvalidRequestException
@@ -42,6 +43,7 @@ class CreateAwbCommand extends AbstractCommand
         if (!$request instanceof CreateAwbRequest) {
             throw new InvalidRequestException('The request should be a CreateAwbRequest');
         }
+
 
         $params = $this->getAuthParams();
 
@@ -87,6 +89,9 @@ class CreateAwbCommand extends AbstractCommand
         $array = (array)$package;
         $array['judet'] = $stringNormalizer->unaccent($package->judet);
         $array['localitate'] = $stringNormalizer->unaccent($package->localitate);
+
+        //the web service seems to not support newlines, replace them
+        $array['observatii'] = preg_replace('#\R+#', ';', $package->observatii);
 
         return $array;
     }
