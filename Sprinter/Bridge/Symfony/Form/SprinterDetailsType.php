@@ -25,7 +25,7 @@ class SprinterDetailsType extends AbstractType
     {
         $builder->add('code', 'hidden', [
             'constraints' => [
-                new NotBlank(['message' => 'Choose a Pick Pack Point'])
+                new NotBlank(['message' => 'Válasszon egy Pick Pack Pont-ot'])
             ]
         ]);
         $builder->add('address', 'hidden');
