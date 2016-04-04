@@ -22,14 +22,13 @@ class SprinterDetailsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        //$data = $options['data'];
-
-        $builder->add('note', 'text', [
-            //'empty_data' => $data['note']
+        $builder->add('code', 'text', [
+            'required' => true
         ]);
-        $builder->add('county', 'text');
-        $builder->add('city', 'text');
-        $builder->add('point', 'text');
+        $builder->add('address', 'hidden');
+        $builder->add('map', 'hidden', [
+            'mapped' => false
+        ]);
     }
 
     /**
