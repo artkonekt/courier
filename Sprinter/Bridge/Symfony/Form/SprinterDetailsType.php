@@ -14,6 +14,7 @@ namespace Konekt\Courier\Sprinter\Bridge\Symfony\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class SprinterDetailsType extends AbstractType
 {
@@ -22,8 +23,10 @@ class SprinterDetailsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('code', 'text', [
-            'required' => true
+        $builder->add('code', 'hidden', [
+            'constraints' => [
+                new NotBlank(['message' => 'Choose a Pick Pack Point'])
+            ]
         ]);
         $builder->add('address', 'hidden');
         $builder->add('map', 'hidden', [
