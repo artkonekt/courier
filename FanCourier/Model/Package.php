@@ -10,7 +10,7 @@
  * @version     2016-02-24
  */
 
-namespace Konekt\Courier\FanCourier;
+namespace Konekt\Courier\FanCourier\Model;
 
 /**
  * Class Package abstracting package data needed for AWB creation.

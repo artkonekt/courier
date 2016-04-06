@@ -13,7 +13,7 @@
 namespace Konekt\Courier\Common\Exception;
 
 
-class InvalidResponseException extends \Exception
+class InvalidResponseException extends CourierException
 {
 
 }

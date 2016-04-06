@@ -37,5 +37,51 @@ class RegisterParcelResponse implements ResponseInterface
         return $this->response;
     }
 
+    /**
+     * Returns the created AWB number.
+     *
+     * @return string
+     */
+    public function getAwbNumber()
+    {
+        foreach($this->response->getRegisterParcelContainerResult()->ParcelResults as $parcelResult) {
+            //print("\tOriginalBarcode: " . $parcelResult->getOriginalBarCode() . "\n");
+            //print("\tNewBarCode: " . $parcelResult->getNewBarCode() . "\n");
+            //print("\tShipmentID: " . $parcelResult->getShipmentID() . "\n");
+            //print("\tErrorCode: " . $parcelResult->getErrorCode() . "\n");
+            //print("\n");
+            $shipmentId = $parcelResult->getShipmentID();
+            break;
+        }
 
+        return $shipmentId;
+    }
+
+    public function isSuccess()
+    {
+        //print('ErrorCode: ' . $response->getRegisterParcelContainerResult()->ErrorCode . "\n");
+        //foreach($response->getRegisterParcelContainerResult()->ParcelResults as $parcelResult) {
+        //    print("\tOriginalBarcode: " . $parcelResult->getOriginalBarCode() . "\n");
+        //    print("\tNewBarCode: " . $parcelResult->getNewBarCode() . "\n");
+        //    print("\tShipmentID: " . $parcelResult->getShipmentID() . "\n");
+        //    print("\tErrorCode: " . $parcelResult->getErrorCode() . "\n");
+        //    print("\n");
+        //}
+
+        return $this->response->getRegisterParcelContainerResult()->ErrorCode != 'PSR_FAILED';
+    }
+
+    public function getErrorMessage()
+    {
+        foreach($this->response->getRegisterParcelContainerResult()->ParcelResults as $parcelResult) {
+            //print("\tOriginalBarcode: " . $parcelResult->getOriginalBarCode() . "\n");
+            //print("\tNewBarCode: " . $parcelResult->getNewBarCode() . "\n");
+            //print("\tShipmentID: " . $parcelResult->getShipmentID() . "\n");
+            //print("\tErrorCode: " . $parcelResult->getErrorCode() . "\n");
+            //print("\n");
+            $error = $parcelResult->getErrorCode();
+            break;
+        }
+        return $error;
+    }
 }

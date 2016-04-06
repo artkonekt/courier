@@ -10,7 +10,7 @@
  * @version     2016-03-02
  */
 
-namespace Konekt\Courier\FanCourier;
+namespace Konekt\Courier\FanCourier\Model;
 
 /**
  * Class abstracting the credentials needed by the FanCourier API.
@@ -21,7 +21,6 @@ class ApiCredentials
      * @var string
      */
     private $username;
-
 
     /**
      * @var string

@@ -13,7 +13,7 @@
 
 namespace Konekt\Courier\Common\Exception;
 
-class InvalidRequestException extends \Exception
+class InvalidRequestException extends CourierException
 {
     /**
      * @var mixed

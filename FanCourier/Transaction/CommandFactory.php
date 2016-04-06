@@ -16,7 +16,7 @@ use Exception;
 use Konekt\Courier\Common\CommandFactoryInterface;
 use Konekt\Courier\Common\CommandInterface;
 use Konekt\Courier\Common\RequestInterface;
-use Konekt\Courier\FanCourier\ApiCredentials;
+use Konekt\Courier\FanCourier\Model\ApiCredentials;
 use Konekt\Courier\FanCourier\Transaction\AwbToHtml\AwbToHtmlCommand;
 use Konekt\Courier\FanCourier\Transaction\AwbToHtml\AwbToHtmlRequest;
 use Konekt\Courier\FanCourier\Transaction\AwbToPdf\AwbToPdfCommand;

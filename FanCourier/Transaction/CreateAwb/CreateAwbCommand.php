@@ -17,7 +17,7 @@ use FanCourier\fanCourier;
 use FanCourier\Plugin\csv\csvItem;
 use Konekt\Courier\Common\Exception\InvalidRequestException;
 use Konekt\Courier\Common\RequestInterface;
-use Konekt\Courier\FanCourier\Package;
+use Konekt\Courier\FanCourier\Model\Package;
 use Konekt\Courier\FanCourier\Transaction\AbstractCommand;
 use Konekt\Courier\FanCourier\Transaction\CreateAwb\Response\Factory;
 

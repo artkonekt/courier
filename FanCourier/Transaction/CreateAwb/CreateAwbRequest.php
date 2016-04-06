@@ -13,7 +13,7 @@
 namespace Konekt\Courier\FanCourier\Transaction\CreateAwb;
 
 use Konekt\Courier\Common\RequestInterface;
-use Konekt\Courier\FanCourier\Package;
+use Konekt\Courier\FanCourier\Model\Package;
 
 /**
  * Request class abstracting the awb creation request.

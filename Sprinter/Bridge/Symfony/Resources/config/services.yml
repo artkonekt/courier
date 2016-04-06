@@ -1,0 +1,13 @@
+services:
+    konekt_courier.sprinter.command.factory:
+        class: Konekt\Courier\Sprinter\PartnerToPudo\Transaction\CommandFactory
+
+    konekt_courier.sprinter.request.processor:
+        class: Konekt\Courier\Common\RequestProcessor
+        arguments:
+            - "@konekt_courier.sprinter.command.factory"
+
+    konekt_courier.sprinter.package.factory:
+        class: Konekt\Courier\Sprinter\Bridge\Sylius\PackageFactory
+        arguments:
+            - "@sylius.province_naming_provider"

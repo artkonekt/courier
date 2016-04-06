@@ -13,7 +13,7 @@
 namespace Konekt\Courier\FanCourier\Transaction;
 
 use Konekt\Courier\Common\CommandInterface;
-use Konekt\Courier\FanCourier\ApiCredentials;
+use Konekt\Courier\FanCourier\Model\ApiCredentials;
 
 /**
  * Class AbstractCommand providing common data and functionality for all Fancourier commands.

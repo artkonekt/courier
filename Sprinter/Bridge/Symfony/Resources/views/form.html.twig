@@ -1,0 +1,61 @@
+{% form_theme form 'KonektCourierBundle:Awb:form_theme.html.twig' %}
+<link rel="stylesheet" href="/bundles/konektcourier/css/main.css"/>
+
+<div id="awb-modal-form">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Sprinter Csomag bejegyzes (AWB)</h4>
+            </div>
+
+            {{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'create-awb-form'}}) }}
+
+            <div class="modal-body">
+
+                {% if result %}
+                    {% if not result.isSuccess() %}
+                        <div class="alert alert-danger alert-dismissable">Eroare: {{ result.getErrorMessage() }}</div>
+                    {% endif %}
+                {% endif %}
+
+
+            </div>
+            <div class="modal-footer">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Mégsem</button>
+                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+<script>
+    (function ($) {
+        $('body').on('submit', '#create-awb-form', function (event) {
+            event.preventDefault(); // Prevent the form from submitting via the browser
+            var form = $(this);
+
+            $.ajax({
+                type: form.attr('method'),
+                url: form.attr('action'),
+                data: form.serialize()
+            }).done(function (response) {
+                var newContent = $($.parseHTML(response)).filter("#awb-modal-form").html();
+                $('#awb-modal-form').html(newContent);
+                $('#awbModal').animate({scrollTop: 0}, 'fast');
+            }).fail(function (data) {
+                alert('Error:'.data);
+            });
+        });
+
+        $('#awbModal').on('hidden.bs.modal', function () {
+            if ($('#awb-modal-awb-nr').length) {
+                location.reload();
+            }
+        })
+    })(jQuery);
+</script>

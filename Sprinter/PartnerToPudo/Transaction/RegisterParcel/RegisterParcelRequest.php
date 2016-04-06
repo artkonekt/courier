@@ -14,8 +14,32 @@ namespace Konekt\Courier\Sprinter\PartnerToPudo\Transaction\RegisterParcel;
 
 
 use Konekt\Courier\Common\RequestInterface;
+use Konekt\Courier\Sprinter\Model\Package;
 
 class RegisterParcelRequest implements  RequestInterface
 {
+    /**
+     * @var Package
+     */
+    private $package;
 
+    /**
+     * CreateAwbRequest constructor.
+     *
+     * @param Package $package
+     */
+    public function __construct(Package $package)
+    {
+        $this->package = $package;
+    }
+
+    /**
+     * Returns the package object based for which the AWB should be created.
+     *
+     * @return Package
+     */
+    public function getPackage()
+    {
+        return $this->package;
+    }
 }

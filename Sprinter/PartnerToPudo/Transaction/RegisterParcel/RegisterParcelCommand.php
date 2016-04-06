@@ -34,6 +34,7 @@ class RegisterParcelCommand extends AbstractCommand
      */
     public function handle(RequestInterface $request)
     {
+        /** @var RegisterParcelRequest $request */
         // framework initialization
         date_default_timezone_set('UTC');
 
@@ -47,6 +48,7 @@ class RegisterParcelCommand extends AbstractCommand
                 'ssl' => array('ciphers'=>'RC4-SHA')
             );
 // SOAP 1.2 client
+
             $soap_options = array ('stream_context' => stream_context_create($opts) );
 
             $partnerCode = '0000001000';
@@ -55,27 +57,29 @@ class RegisterParcelCommand extends AbstractCommand
 
             $barcodePrefixToday = $partnerBarcodePrefix . date('Ymd'); // PUDO20150708 (+ dynamically ascending number)
 
+            $package = $request->getPackage();
+
             // parcel
             $simpleParcel = new Parcel(1, 'Normal', 0);
             $simpleParcel->setAutorizationCode($barcodePrefixToday . $counter); // The field of ’AuthoziationCode’ can be used for registering any IDs at our partner’s convenience (e.g. orderID). These values are stored in the database of PUDO.
             $simpleParcel->setBarCode($barcodePrefixToday . $counter); // PUDO201507081
             $simpleParcel->setCustomerType('B2C'); // Default value
-            $simpleParcel->setCustomerName('Customer Name');
-            $simpleParcel->setCustomerPostalCode('1097');
-            $simpleParcel->setCustomerCity('Budapest');
-            $simpleParcel->setCustomerAddress('Táblás u. 32/a');
-            $simpleParcel->setCustomerPhone('+3613477300');
-            $simpleParcel->setCustomerEmail('customer@lapker.hu');
+            $simpleParcel->setCustomerName($package->customerName);
+            $simpleParcel->setCustomerPostalCode($package->customerPostalCode);
+            $simpleParcel->setCustomerCity($package->customerCity);
+            $simpleParcel->setCustomerAddress($package->customerAddress);
+            $simpleParcel->setCustomerPhone($package->customerPhone);
+            $simpleParcel->setCustomerEmail($package->customerEmail);
             //$simpleParcel->ParcelCount = 1;
-            $simpleParcel->setPackagePrice(900);
-            $simpleParcel->setPriceAtDelivery(1000);
+            $simpleParcel->setPackagePrice($package->packagePrice);
+            $simpleParcel->setPriceAtDelivery($package->priceAtDelivery);
 
             $simpleParcel->setRegisterDate(new \DateTime());
             $simpleParcel->setTracking(true);
             //$simpleParcel->TransitTime = 0; // Default value
-            $simpleParcel->setDestinationLocationId('0000101117'); // ShopID
-            $simpleParcel->setIsPartnerInvoiced(false);
-            $simpleParcel->setPackageType('Small');
+            $simpleParcel->setDestinationLocationId($package->destinationLocationId);//$request->getPackage()->posId); // ShopID//0000101117
+            $simpleParcel->setIsPartnerInvoiced($package->isPartnerInvoiced);
+            $simpleParcel->setPackageType($package->packageType);
             //$simpleParcel->ServiceType = 'Normal';
 
             $simpleParcel->setParcelCreationStatus('Create');

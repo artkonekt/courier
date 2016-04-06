@@ -1,19 +1,19 @@
 <?php
 /**
- * Contains class InvalidCommandException
+ * Contains class CourierException
  *
- * @package     Konekt\Courier\Common
+ * @package     courier\Common\Exception
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
  * @author      Lajos Fazakas <lajos@artkonekt.com>
  * @license     Proprietary
- * @since       2016-03-04
- * @version     2016-03-04
+ * @since       2016-04-05
+ * @version     2016-04-05
  */
 
 namespace Konekt\Courier\Common\Exception;
 
 
-class InvalidCommandException extends CourierException
+class CourierException extends  \Exception
 {
 
 }
