@@ -59,6 +59,9 @@ class RegisterParcelResponse implements ResponseInterface
 
     public function isSuccess()
     {
+        if ($this->response instanceof \Exception) {
+            return false;
+        }
         //print('ErrorCode: ' . $response->getRegisterParcelContainerResult()->ErrorCode . "\n");
         //foreach($response->getRegisterParcelContainerResult()->ParcelResults as $parcelResult) {
         //    print("\tOriginalBarcode: " . $parcelResult->getOriginalBarCode() . "\n");
@@ -73,6 +76,10 @@ class RegisterParcelResponse implements ResponseInterface
 
     public function getErrorMessage()
     {
+        if ($this->response instanceof \Exception) {
+            return $this->response->getMessage();
+        }
+
         foreach($this->response->getRegisterParcelContainerResult()->ParcelResults as $parcelResult) {
             //print("\tOriginalBarcode: " . $parcelResult->getOriginalBarCode() . "\n");
             //print("\tNewBarCode: " . $parcelResult->getNewBarCode() . "\n");

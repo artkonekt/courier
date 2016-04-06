@@ -21,6 +21,7 @@ use Konekt\Courier\Sprinter\PartnerToPudo\Component\RegisterParcelContainer;
 use Konekt\Courier\Sprinter\PartnerToPudo\Component\RegisterParcelContainerRequest;
 use Konekt\Courier\Sprinter\PartnerToPudo\Component\Supplier;
 use Konekt\Courier\Sprinter\PartnerToPudo\Transaction\AbstractCommand;
+use SoapFault;
 
 class RegisterParcelCommand extends AbstractCommand
 {
@@ -98,7 +99,7 @@ class RegisterParcelCommand extends AbstractCommand
             $response = $client->RegisterParcelContainer(new RegisterParcelContainer($request));
 
         }  catch(SoapFault $e){
-            echo $e->getMessage();
+            $response = $e;
         }
 
         return new RegisterParcelResponse($response);
