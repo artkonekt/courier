@@ -12,7 +12,8 @@
 
 namespace Konekt\Courier\FanCourier\Transaction\CreateAwb;
 
-use Exception;
+use Konekt\Courier\Common\Response\StatusAwareResponseInterface;
+use Konekt\Courier\FanCourier\Utils\StringNormalizer;
 use FanCourier\fanCourier;
 use FanCourier\Plugin\csv\csvItem;
 use Konekt\Courier\Common\Exception\InvalidRequestException;
@@ -32,15 +33,17 @@ class CreateAwbCommand extends AbstractCommand
      *
      * @param RequestInterface $request
      *
-     * @return \Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbResponse
-     *
-     * @throws \Konekt\Courier\FanCourier\Transaction\CreateAwb\InvalidRequestException
+     * @return StatusAwareResponseInterface
+     * @throws \Exception
+     * @throws \FanCourier\Plugin\Exeption\fcApiExeption
+     * @throws \Konekt\Courier\Common\Exception\InvalidRequestException
      */
     public function handle(RequestInterface $request)
     {
         if (!$request instanceof CreateAwbRequest) {
             throw new InvalidRequestException('The request should be a CreateAwbRequest');
         }
+
 
         $params = $this->getAuthParams();
 
@@ -81,24 +84,15 @@ class CreateAwbCommand extends AbstractCommand
      */
     private function toArray(Package $package)
     {
+        $stringNormalizer = new StringNormalizer();
+
         $array = (array)$package;
-        $array['judet'] = $this->unaccent($package->judet);
-        $array['localitate'] = $this->unaccent($package->localitate);
+        $array['judet'] = $stringNormalizer->unaccent($package->judet);
+        $array['localitate'] = $stringNormalizer->unaccent($package->localitate);
+
+        //the web service seems to not support newlines, replace them
+        $array['observatii'] = preg_replace('#\R+#', ';', $package->observatii);
 
         return $array;
-    }
-
-    /**
-     * Removes romanian accent from a string. Fancourier API needs this normalization for some parameters.
-     *
-     * @param $string
-     *
-     * @return string
-     */
-    private function unaccent($string)
-    {
-        $accentMap = ['ă' => 'a', 'â' => 'a', 'î' => 'i', 'ț' => 't', 'ș' => 's'];
-
-        return strtr($string, $accentMap);
     }
 }
