@@ -1,6 +1,14 @@
 services:
+    konekt_courier.fancourier.configuration:
+        class: Konekt\Courier\Sprinter\Model\Configuration
+        arguments:
+            - %konekt_courier.sprinter.configuration.partnerCode%
+            - %konekt_courier.sprinter.configuration.partnerBarcodePrefix%
+
     konekt_courier.sprinter.command.factory:
         class: Konekt\Courier\Sprinter\PartnerToPudo\Transaction\CommandFactory
+        arguments:
+            - "@konekt_courier.fancourier.configuration"
 
     konekt_courier.sprinter.request.processor:
         class: Konekt\Courier\Common\RequestProcessor

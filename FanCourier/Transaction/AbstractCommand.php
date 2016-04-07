@@ -13,7 +13,7 @@
 namespace Konekt\Courier\FanCourier\Transaction;
 
 use Konekt\Courier\Common\CommandInterface;
-use Konekt\Courier\FanCourier\Model\ApiCredentials;
+use Konekt\Courier\FanCourier\Model\Configuration;
 
 /**
  * Class AbstractCommand providing common data and functionality for all Fancourier commands.
@@ -23,18 +23,18 @@ use Konekt\Courier\FanCourier\Model\ApiCredentials;
 abstract class AbstractCommand implements CommandInterface
 {
     /**
-     * @var ApiCredentials
+     * @var Configuration
      */
-    protected $credentials;
+    protected $configuration;
 
     /**
      * AbstractCommand constructor.
      *
-     * @param ApiCredentials $credentials
+     * @param Configuration $configuration
      */
-    public function __construct(ApiCredentials $credentials)
+    public function __construct(Configuration $configuration)
     {
-        $this->credentials = $credentials;
+        $this->configuration = $configuration;
     }
 
     /**
@@ -44,12 +44,12 @@ abstract class AbstractCommand implements CommandInterface
      */
     protected function getAuthParams()
     {
-        $credentials = $this->credentials;
+        $configuration = $this->configuration;
 
         $params = [
-            'username' => $credentials->getUsername(),
-            'user_pass' => $credentials->getPassword(),
-            'client_id' => $credentials->getClientId(),
+            'username' => $configuration->getUsername(),
+            'user_pass' => $configuration->getPassword(),
+            'client_id' => $configuration->getClientId(),
         ];
 
         return $params;

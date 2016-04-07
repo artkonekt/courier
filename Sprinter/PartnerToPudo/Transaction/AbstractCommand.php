@@ -14,8 +14,27 @@ namespace Konekt\Courier\Sprinter\PartnerToPudo\Transaction;
 
 
 use Konekt\Courier\Common\CommandInterface;
+use Konekt\Courier\Sprinter\Model\Configuration;
 
 abstract class AbstractCommand implements CommandInterface
 {
+    protected $configuration;
 
+    /**
+     * AbstractCommand constructor.
+     *
+     * @param $configuration
+     */
+    public function __construct($configuration)
+    {
+        $this->configuration = $configuration;
+    }
+
+    /**
+     * @return Configuration
+     */
+    public function getConfiguration()
+    {
+        return $this->configuration;
+    }
 }

@@ -16,7 +16,7 @@ use Exception;
 use Konekt\Courier\Common\CommandFactoryInterface;
 use Konekt\Courier\Common\CommandInterface;
 use Konekt\Courier\Common\RequestInterface;
-use Konekt\Courier\FanCourier\Model\ApiCredentials;
+use Konekt\Courier\FanCourier\Model\Configuration;
 use Konekt\Courier\FanCourier\Transaction\AwbToHtml\AwbToHtmlCommand;
 use Konekt\Courier\FanCourier\Transaction\AwbToHtml\AwbToHtmlRequest;
 use Konekt\Courier\FanCourier\Transaction\AwbToPdf\AwbToPdfCommand;
@@ -34,18 +34,18 @@ use Konekt\Courier\FanCourier\Transaction\DeleteAwb\DeleteAwbRequest;
 class CommandFactory implements CommandFactoryInterface
 {
     /**
-     * @var ApiCredentials
+     * @var Configuration
      */
-    private $apiCredentials;
+    private $configuration;
 
     /**
      * CommandFactory constructor.
      *
-     * @param ApiCredentials $apiCredentials The Fancourier credential object
+     * @param Configuration $configuration The Fancourier credential object
      */
-    public function __construct(ApiCredentials $apiCredentials)
+    public function __construct(Configuration $configuration)
     {
-        $this->apiCredentials = $apiCredentials;
+        $this->configuration = $configuration;
     }
 
     /**
@@ -58,13 +58,13 @@ class CommandFactory implements CommandFactoryInterface
     public function createCommand(RequestInterface $request)
     {
         if ($request instanceof AwbToPdfRequest) {
-            $command = new AwbToPdfCommand($this->apiCredentials);
+            $command = new AwbToPdfCommand($this->configuration);
         } elseif ($request instanceof CreateAwbRequest) {
-            $command = new CreateAwbCommand($this->apiCredentials);
+            $command = new CreateAwbCommand($this->configuration);
         } elseif ($request instanceof AwbToHtmlRequest) {
-            $command = new AwbToHtmlCommand($this->apiCredentials);
+            $command = new AwbToHtmlCommand($this->configuration);
         } elseif ($request instanceof DeleteAwbRequest) {
-            $command = new DeleteAwbCommand($this->apiCredentials);
+            $command = new DeleteAwbCommand($this->configuration);
         } else {
             throw new Exception("No command matches request of type " . get_class($request));
         }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains class ApiCredentials
+ * Contains class configuration
  *
  * @package     Konekt\Courier\FanCourier
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
@@ -15,7 +15,7 @@ namespace Konekt\Courier\FanCourier\Model;
 /**
  * Class abstracting the credentials needed by the FanCourier API.
  */
-class ApiCredentials
+class Configuration
 {
     /**
      * @var string
@@ -33,7 +33,7 @@ class ApiCredentials
     private $clientId;
 
     /**
-     * ApiCredentials constructor.
+     * configuration constructor.
      *
      * @param string $username
      * @param string $password

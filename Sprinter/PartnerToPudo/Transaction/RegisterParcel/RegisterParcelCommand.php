@@ -37,7 +37,7 @@ class RegisterParcelCommand extends AbstractCommand
     {
         /** @var RegisterParcelRequest $request */
         // framework initialization
-        date_default_timezone_set('UTC');
+        date_default_timezone_set('UTC'); //what's this?
 
 
         try {
@@ -52,8 +52,8 @@ class RegisterParcelCommand extends AbstractCommand
 
             $soap_options = array ('stream_context' => stream_context_create($opts) );
 
-            $partnerCode = '0000001000';
-            $partnerBarcodePrefix = 'PUDO'; // in business test phase, you get your own unique barcode prefix
+            $partnerCode = $this->getConfiguration()->getPartnerCode();
+            $partnerBarcodePrefix = $this->getConfiguration()->getPartnerBarcodePrefix(); // in business test phase, you get your own unique barcode prefix
             $counter = 1;
 
             $barcodePrefixToday = $partnerBarcodePrefix . date('Ymd'); // PUDO20150708 (+ dynamically ascending number)

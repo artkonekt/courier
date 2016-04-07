@@ -16,6 +16,7 @@ namespace Konekt\Courier\Sprinter\PartnerToPudo\Transaction;
 use Konekt\Courier\Common\CommandFactoryInterface;
 use Konekt\Courier\Common\CommandInterface;
 use Konekt\Courier\Common\RequestInterface;
+use Konekt\Courier\Sprinter\Model\Configuration;
 use Konekt\Courier\Sprinter\PartnerToPudo\Transaction\AwbToHtml\AwbToHtmlCommand;
 use Konekt\Courier\Sprinter\PartnerToPudo\Transaction\AwbToHtml\AwbToHtmlRequest;
 use Konekt\Courier\Sprinter\PartnerToPudo\Transaction\RegisterParcel\RegisterParcelCommand;
@@ -23,6 +24,20 @@ use Konekt\Courier\Sprinter\PartnerToPudo\Transaction\RegisterParcel\RegisterPar
 
 class CommandFactory implements CommandFactoryInterface
 {
+    /**
+     * @var Configuration
+     */
+    protected $configuration;
+
+    /**
+     * AbstractCommand constructor.
+     *
+     * @param Configuration $configuration
+     */
+    public function __construct(Configuration $configuration)
+    {
+        $this->configuration = $configuration;
+    }
 
     /**
      * Creates the command which handles the request.
@@ -34,9 +49,9 @@ class CommandFactory implements CommandFactoryInterface
     public function createCommand(RequestInterface $request)
     {
         if ($request instanceof RegisterParcelRequest) {
-            $command = new RegisterParcelCommand();
+            $command = new RegisterParcelCommand($this->configuration);
         } elseif ($request instanceof AwbToHtmlRequest) {
-            $command = new AwbToHtmlCommand();
+            $command = new AwbToHtmlCommand($this->configuration);
         }
 
         return $command;
