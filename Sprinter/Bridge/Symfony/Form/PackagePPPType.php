@@ -22,7 +22,10 @@ class PackagePPPType extends PackageType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-        $builder->add('destinationLocationId', 'text', ['label' => 'destinationLocationId', 'required' => true]);
+        $builder->add('destinationLocationId', 'text', [
+            'label' => 'Pick Pack Pont kódja',
+            'required' => true
+        ]);
     }
 
     /**

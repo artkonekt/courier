@@ -80,7 +80,7 @@ class RegisterParcelCommand extends AbstractCommand
             $simpleParcel->setPriceAtDelivery($package->priceAtDelivery);
 
             $simpleParcel->setRegisterDate(new \DateTime());
-            $simpleParcel->setTracking(true);
+            $simpleParcel->setTracking(true); //TOREVIEW
 
             if (RegisterParcelRequest::TYPE_PPP === $request->getType()) {
                 $simpleParcel->setDestinationLocationId($package->destinationLocationId);//test shopID: 0000101117

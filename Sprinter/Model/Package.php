@@ -15,6 +15,14 @@ namespace Konekt\Courier\Sprinter\Model;
 
 class Package
 {
+    const PACKAGE_TYPES = [
+        'Small' => 'Kicsi',
+        'Medium' => 'Közepes',
+        'Large' => 'Nagy',
+        'Special' => 'Speciális',
+        'None' => 'Nincs megadva'
+    ];
+    
     public $parcelCount;
     
     public $authorizationCode;
