@@ -42,7 +42,11 @@ class PackageFactory
         $package->customerEmail = $shippingAddress->getCustomer()->getEmail();
         $package->packagePrice = ($order->getTotal() / 100); //ez kell-e mindig
         $package->priceAtDelivery = ($order->getTotal() / 100); //?mi ez
-        $package->destinationLocationId = $carrierDetails['code'];
+
+        if ('sprinter_ppp' == $shipment->getCarrier()) {
+            $package->destinationLocationId = $carrierDetails['code'];
+        }
+        
         $package->isPartnerInvoiced = false; //??ez mi
         $package->packageType = 'Small'; //ez mi?
 

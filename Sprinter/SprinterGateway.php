@@ -21,7 +21,7 @@ class SprinterGateway
     {
         return [
             Operations::CREATE_AWB,
-            Operations::SHOW_LABEL_HTML
+            //Operations::SHOW_LABEL_HTML
         ];
     }
 
