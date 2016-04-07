@@ -37,7 +37,7 @@ class RegisterParcelCommand extends AbstractCommand
     {
         /** @var RegisterParcelRequest $request */
         // framework initialization
-        date_default_timezone_set('UTC'); //what's this?
+        date_default_timezone_set('UTC'); //TOREVIEW
 
 
         try {
@@ -59,30 +59,34 @@ class RegisterParcelCommand extends AbstractCommand
 
             // parcel
 
+            if (RegisterParcelRequest::TYPE_PPP === $request->getType()) {
+                $type = 'Normal';
+            } elseif (RegisterParcelRequest::TYPE_HOMEDELIVERY === $request->getType()) {
+                $type = 'HomeDeliver';
+            }
             //TransitTime??? should we allow selection? what should send if not
-            $simpleParcel = new Parcel($package->parcelCount, 'HomeDeliver', 0); //'Normal' PPP eseten, 'HomeDeliver' sima sprinter eseten
+            $simpleParcel = new Parcel($package->parcelCount, $type, 0);
 
             $simpleParcel->setAutorizationCode($package->authorizationCode); // The field of ’AuthoziationCode’ can be used for registering any IDs at our partner’s convenience (e.g. orderID). These values are stored in the database of PUDO.
-            $simpleParcel->setBarCode($barcode); // PUDO201507081
-            $simpleParcel->setCustomerType('B2C'); // Default value
+            $simpleParcel->setBarCode($barcode);
+            $simpleParcel->setCustomerType('B2C'); //TOREVIEW: ??
             $simpleParcel->setCustomerName($package->customerName);
             $simpleParcel->setCustomerPostalCode($package->customerPostalCode);
             $simpleParcel->setCustomerCity($package->customerCity);
             $simpleParcel->setCustomerAddress($package->customerAddress);
             $simpleParcel->setCustomerPhone($package->customerPhone);
             $simpleParcel->setCustomerEmail($package->customerEmail);
-            //$simpleParcel->ParcelCount = 1;
             $simpleParcel->setPackagePrice($package->packagePrice);
             $simpleParcel->setPriceAtDelivery($package->priceAtDelivery);
 
             $simpleParcel->setRegisterDate(new \DateTime());
             $simpleParcel->setTracking(true);
-            //$simpleParcel->TransitTime = 0; // Default value
-            $simpleParcel->setDestinationLocationId($package->destinationLocationId);//$request->getPackage()->posId); // ShopID//0000101117
+
+            if (RegisterParcelRequest::TYPE_PPP === $request->getType()) {
+                $simpleParcel->setDestinationLocationId($package->destinationLocationId);//test shopID: 0000101117
+            }
             $simpleParcel->setIsPartnerInvoiced($package->isPartnerInvoiced);
             $simpleParcel->setPackageType($package->packageType);
-
-            //$simpleParcel->ServiceType = 'Normal';
 
             $simpleParcel->setParcelCreationStatus('Create');
 
@@ -90,7 +94,6 @@ class RegisterParcelCommand extends AbstractCommand
             $parcels[] = $simpleParcel;
 
             $request = new RegisterParcelContainerRequest(Supplier::Partner);
-            //$request->sets = $supplier;
             $request->setPartnerCode($this->getConfiguration()->getPartnerCode());
             $request->setParcelContainer($parcels);
             $request->setArriveDate(new \DateTime());

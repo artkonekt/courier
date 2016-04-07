@@ -34,7 +34,6 @@ class PackageType extends AbstractType
             ->add('customerEmail', 'text', ['label' => 'customerEmail', 'required' => true])
             ->add('packagePrice', 'text', ['label' => 'packagePrice', 'required' => true])
             ->add('priceAtDelivery', 'text', ['label' => 'priceAtDelivery', 'required' => true])
-            ->add('destinationLocationId', 'text', ['label' => 'destinationLocationId', 'required' => true])
             ->add('isPartnerInvoiced', 'checkbox', ['label' => 'isPartnerInvoiced', 'required' => false])
             ->add('packageType', 'text', ['label' => 'packageType', 'required' => true])
         ;
