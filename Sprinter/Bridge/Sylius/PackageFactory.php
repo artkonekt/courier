@@ -33,6 +33,7 @@ class PackageFactory
         $shippingAddress = $order->getShippingAddress();
         $carrierDetails = $shipment->getCarrierShipmentDetails();
 
+        $package->authorizationCode = $order->getNumber();
         $package->customerName = $shippingAddress->getFullName();
         $package->customerPostalCode = $shippingAddress->getPostcode();
         $package->customerCity = $shippingAddress->getCity();

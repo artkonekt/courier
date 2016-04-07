@@ -52,18 +52,18 @@ class RegisterParcelCommand extends AbstractCommand
 
             $soap_options = array ('stream_context' => stream_context_create($opts) );
 
-            $partnerCode = $this->getConfiguration()->getPartnerCode();
-            $partnerBarcodePrefix = $this->getConfiguration()->getPartnerBarcodePrefix(); // in business test phase, you get your own unique barcode prefix
-            $counter = 1;
-
-            $barcodePrefixToday = $partnerBarcodePrefix . date('Ymd'); // PUDO20150708 (+ dynamically ascending number)
-
             $package = $request->getPackage();
 
+
+            $barcode = $this->getConfiguration()->getBarcodeGenerator()->getBarcode();
+
             // parcel
-            $simpleParcel = new Parcel(1, 'Normal', 0);
-            $simpleParcel->setAutorizationCode($barcodePrefixToday . $counter); // The field of ’AuthoziationCode’ can be used for registering any IDs at our partner’s convenience (e.g. orderID). These values are stored in the database of PUDO.
-            $simpleParcel->setBarCode($barcodePrefixToday . $counter); // PUDO201507081
+
+            //TransitTime??? should we allow selection? what should send if not
+            $simpleParcel = new Parcel($package->parcelCount, 'HomeDeliver', 0); //'Normal' PPP eseten, 'HomeDeliver' sima sprinter eseten
+
+            $simpleParcel->setAutorizationCode($package->authorizationCode); // The field of ’AuthoziationCode’ can be used for registering any IDs at our partner’s convenience (e.g. orderID). These values are stored in the database of PUDO.
+            $simpleParcel->setBarCode($barcode); // PUDO201507081
             $simpleParcel->setCustomerType('B2C'); // Default value
             $simpleParcel->setCustomerName($package->customerName);
             $simpleParcel->setCustomerPostalCode($package->customerPostalCode);
@@ -81,6 +81,7 @@ class RegisterParcelCommand extends AbstractCommand
             $simpleParcel->setDestinationLocationId($package->destinationLocationId);//$request->getPackage()->posId); // ShopID//0000101117
             $simpleParcel->setIsPartnerInvoiced($package->isPartnerInvoiced);
             $simpleParcel->setPackageType($package->packageType);
+
             //$simpleParcel->ServiceType = 'Normal';
 
             $simpleParcel->setParcelCreationStatus('Create');
@@ -90,7 +91,7 @@ class RegisterParcelCommand extends AbstractCommand
 
             $request = new RegisterParcelContainerRequest(Supplier::Partner);
             //$request->sets = $supplier;
-            $request->setPartnerCode($partnerCode);
+            $request->setPartnerCode($this->getConfiguration()->getPartnerCode());
             $request->setParcelContainer($parcels);
             $request->setArriveDate(new \DateTime());
 

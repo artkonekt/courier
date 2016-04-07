@@ -24,6 +24,8 @@ class PackageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('parcelCount', 'text', ['label' => 'parcelCount', 'required' => true])
+            ->add('authorizationCode', 'text', ['label' => 'authorizationCode', 'required' => true])
             ->add('customerName', 'text', ['label' => 'customerName', 'required' => true])
             ->add('customerPostalCode', 'text', ['label' => 'customerPostalCode', 'required' => true])
             ->add('customerCity', 'text', ['label' => 'customerCity', 'required' => true])

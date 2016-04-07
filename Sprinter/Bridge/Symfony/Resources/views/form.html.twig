@@ -15,7 +15,7 @@
 
                 {% if result %}
                     {% if not result.isSuccess() %}
-                        <div class="alert alert-danger alert-dismissable">Eroare: {{ result.getErrorMessage() }}</div>
+                        <div class="alert alert-danger alert-dismissable">Hiba: {{ result.getErrorMessage() }}</div>
                     {% endif %}
                 {% endif %}
 

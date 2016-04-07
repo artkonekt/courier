@@ -13,6 +13,8 @@
 namespace Konekt\Courier\Sprinter\Model;
 
 
+use Konekt\Courier\Sprinter\Utils\BarcodeGenerator;
+
 class Configuration
 {
     private $partnerCode;
@@ -20,15 +22,22 @@ class Configuration
     private $partnerBarcodePrefix;
 
     /**
+     * @var BarcodeGenerator
+     */
+    private $barcodeGenerator;
+
+    /**
      * Configuration constructor.
      *
      * @param $partnerCode
      * @param $partnerBarcodePrefix
      */
-    public function __construct($partnerCode = '0000001000', $partnerBarcodePrefix = 'PUDO')
+    public function __construct($partnerCode, $partnerBarcodePrefix)
     {
         $this->partnerCode = $partnerCode;
         $this->partnerBarcodePrefix = $partnerBarcodePrefix;
+        //TODO: inject this
+        $this->barcodeGenerator = new BarcodeGenerator($this->partnerBarcodePrefix);
     }
 
     /**
@@ -45,5 +54,13 @@ class Configuration
     public function getPartnerBarcodePrefix()
     {
         return $this->partnerBarcodePrefix;
+    }
+
+    /**
+     * @return BarcodeGenerator
+     */
+    public function getBarcodeGenerator()
+    {
+        return $this->barcodeGenerator;
     }
 }

@@ -15,6 +15,10 @@ namespace Konekt\Courier\Sprinter\Model;
 
 class Package
 {
+    public $parcelCount;
+    
+    public $authorizationCode;
+
     public $customerName;
 
     public $customerPostalCode;
