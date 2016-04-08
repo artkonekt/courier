@@ -21,7 +21,7 @@
 
                 {{ form_row(form.parcelCount) }}
                 {% if form.destinationLocationId is defined %}
-                    {{ form_row(form.destinationLocationId) }}
+                    {{ form_row(form.destinationLocationId, {'attr': {'help' : form.destinationLocationId.parent.vars.attr.shopInfo }}) }}
                 {% endif %}
                 {{ form_row(form.authorizationCode) }}
 

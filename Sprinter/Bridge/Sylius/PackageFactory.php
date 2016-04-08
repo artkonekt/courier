@@ -50,6 +50,8 @@ class PackageFactory
         $package->isPartnerInvoiced = false; //??ez mi
         $package->packageType = 'Small'; //ez mi?
 
+        $package->shopInfo = $carrierDetails['address'];
+
         //TODO: remove the comment section below after the system becomes stable
         //FOR REFERENCE, THESE WERE THE TEST DATA:
         //$simpleParcel->setCustomerName('Customer Name');

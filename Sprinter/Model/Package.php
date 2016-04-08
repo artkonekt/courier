@@ -48,4 +48,7 @@ class Package
     public $isPartnerInvoiced;
 
     public $packageType;
+
+    //TOREVIEW:
+    public $shopInfo; //this is used only on the form to display the ppp address
 }
