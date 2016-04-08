@@ -25,6 +25,7 @@ class BarcodeGenerator
     public function getBarcode()
     {
         $secondsSinceMidnight = (time() % 86400);
-        return sprintf('%s%s%05d', $this->partnerBarcodePrefix, date('Ymd'), $secondsSinceMidnight);
+        $dateSnippet = substr(date('ymd'), 1); //E/HH/NN
+        return sprintf('%s%s%05d', $this->partnerBarcodePrefix, $dateSnippet, $secondsSinceMidnight);
     }
 }
