@@ -17,8 +17,9 @@
                 "name": "curier/fancourier",
                 "version": "dev-fork",
                 "source": {
+                    "type": "git",
                     "url": "https://github.com/artkonekt/FanCourier.git",
-                    "type": "git"
+                    "reference": "fork"
                 }
             }
         }
