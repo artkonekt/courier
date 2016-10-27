@@ -25,6 +25,8 @@ use Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbCommand;
 use Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbRequest;
 use Konekt\Courier\FanCourier\Transaction\DeleteAwb\DeleteAwbCommand;
 use Konekt\Courier\FanCourier\Transaction\DeleteAwb\DeleteAwbRequest;
+use Konekt\Courier\FanCourier\Transaction\DeliveryDate\DeliveryDateCommand;
+use Konekt\Courier\FanCourier\Transaction\DeliveryDate\DeliveryDateRequest;
 use Konekt\Courier\FanCourier\Transaction\TrackPackage\TrackPackageCommand;
 use Konekt\Courier\FanCourier\Transaction\TrackPackage\TrackPackageRequest;
 
@@ -69,6 +71,8 @@ class CommandFactory implements CommandFactoryInterface
             $command = new DeleteAwbCommand($this->apiCredentials);
         } elseif ($request instanceof TrackPackageRequest) {
             $command = new TrackPackageCommand($this->apiCredentials);
+        } elseif ($request instanceof DeliveryDateRequest) {
+            $command = new DeliveryDateCommand($this->apiCredentials);
         } else {
             throw new Exception("No command matches request of type " . get_class($request));
         }
