@@ -83,26 +83,9 @@ class TrackPackageResponse implements ResponseInterface
 
     private function getStateFromResponse()
     {
-        $map = [
-            "AWB-ul nu a fost predat catre FAN Courier" => PackageState::AWB_NU_A_FOST_PREDAT_CATRE_FANCOURIER,
-            "Expeditie in livrare" => PackageState::EXPEDITIE_IN_LIVRARE,
-            "Livrat" => PackageState::LIVRAT,
-            "Avizat" => PackageState::AVIZAT,
-            "Refuz primire" => PackageState::REFUZ_PRIMIRE,
-            "Refuz plata transport" => PackageState::REFUZ_PLATA_TRANSPORT,
-            "Livrare din sediul FAN Courier" => PackageState::LIVRARE_DIN_SEDIUL_FAN_COURIER,
-            "Redirectionat" => PackageState::REDIRECTIONAT,
-            "Contactat, livrare ulterioara" => PackageState::CONTACTAT_LIVRARE_ULTERIOARA,
-            "Restrictii acces la adresa" => PackageState::RESTRICTII_ACCES_LA_ADRESA,
-            "Refuz plata ramburs" => PackageState::REFUZ_PLATA_RAMBURS,
-            "AWB neexpediat" => PackageState::AWB_NEEXPEDIAT,
-            "Adresa gresita" => PackageState::ADRESA_GRESITA,
-            "Retur" => PackageState::RETUR
-        ];
-
         $state = PackageState::UNKNOWN();
 
-        foreach ($map as $key => $value) {
+        foreach (array_flip(PackageState::choices()) as $key => $value) {
             if (false !== strpos($this->rawResponse, $key)) {
                 $state = new PackageState($value);
                 break;
