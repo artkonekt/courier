@@ -18,7 +18,7 @@ use Konekt\Courier\Common\Exception\InvalidResponseException;
 /**
  * The top level class which turns the courier requests into responses. This should be used in client codes.
  */
-final class RequestProcessor
+class RequestProcessor
 {
     /**
      * @var CommandFactoryInterface
