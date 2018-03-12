@@ -92,7 +92,6 @@ class CreateAwbCommand extends AbstractCommand
 
         //the web service seems to not support newlines, replace them
         $array['observatii'] = preg_replace('#\R+#', ';', $package->observatii);
-        $array['optiuni'] = $package->optiuni ? 'A': '';
 
         return $array;
     }
