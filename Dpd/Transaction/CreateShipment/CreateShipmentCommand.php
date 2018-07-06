@@ -13,11 +13,14 @@
 
 namespace Konekt\Courier\Dpd\Transaction\CreateShipment;
 
+use Exception;
 use Konekt\Courier\Common\ResponseInterface;
 use Konekt\Courier\Dpd\Api\Api;
 use Konekt\Courier\Dpd\Api\CreateShipment;
+use Konekt\Courier\Dpd\GenericErrorResponse;
 use Konekt\Courier\Dpd\Transaction\AbstractCommand;
 use Konekt\Courier\Common\RequestInterface;
+use Konekt\Courier\Dpd\Transaction\ErrorResponse;
 
 class CreateShipmentCommand extends AbstractCommand
 {
@@ -33,6 +36,7 @@ class CreateShipmentCommand extends AbstractCommand
         $recipient = (object)[
             "phone1" => (object)[
                 "number" => "0740242854",
+                //"number" => "1234",
             ],
             "privatePerson" => true,
             "clientName" => "TEST",
@@ -46,7 +50,15 @@ class CreateShipmentCommand extends AbstractCommand
             ],
         ];
 
+        //TODO: if after 17:00, pickup is possible only the next day (error is returned if not)
+        if ((date('H') < 17)) {
+            $pickupDate = date("Y-m-d");
+        } else {
+            $pickupDate = date("Y-m-d", strtotime('tomorrow'));
+        }
+
         $service = (object)[
+            'pickupDate' => $pickupDate,
             "serviceId" => 2002,
             "additionalServices" => (object)[
                 "declaredValue" => (object)[
@@ -91,6 +103,18 @@ class CreateShipmentCommand extends AbstractCommand
         );
 
         $api = new Api();
-        $api->call('shipment', 'post', json_encode($params));
+
+        try {
+            $jsonResponse = $api->call('shipment', 'post', json_encode($params));
+            $response = json_decode($jsonResponse);
+
+            if (isset($response->error)) {
+                return new ErrorResponse($response);
+            } else {
+                return new CreateShipmentResponse($response);
+            }
+        } catch (Exception $e) {
+            return new GenericErrorResponse($e->getMessage());
+        }
     }
 }

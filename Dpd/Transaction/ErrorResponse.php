@@ -1,22 +1,22 @@
 <?php
 
 /**
- * Contains the CreateShipmentResponse class
+ * Contains the ErrorResponse class
  *
- * @package     Konekt\Courier\Dpd\Transaction\CreateShipment
+ * @package     Dpd\Transaction
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
  * @author      Lajos Fazakas <lajos@artkonekt.com>
  * @license     Proprietary
- * @since       2018-07-04
+ * @since       2018-07-05
  */
 
 
-namespace Konekt\Courier\Dpd\Transaction\CreateShipment;
+namespace Konekt\Courier\Dpd\Transaction;
 
 
 use Konekt\Courier\Common\Response\StatusAwareResponseInterface;
 
-class CreateShipmentResponse implements StatusAwareResponseInterface
+class ErrorResponse implements StatusAwareResponseInterface
 {
     /** @var string */
     private $body;
@@ -31,9 +31,13 @@ class CreateShipmentResponse implements StatusAwareResponseInterface
         $this->body = $body;
     }
 
-    public function getAwbNumber()
+    /**
+     * Returns the full error message as string
+     */
+    public function getErrorMessage()
     {
-        return $this->body->id;
+        $error = $this->body->error;
+        return $error->message . ' (' . $error->context . ')';
     }
 
     /**
@@ -43,6 +47,6 @@ class CreateShipmentResponse implements StatusAwareResponseInterface
      */
     public function isSuccess()
     {
-        return true;
+        return false;
     }
 }

@@ -17,13 +17,26 @@ use Guzzle\Http\Client;
 
 class Api
 {
+    /**
+     * @var string
+     */
     protected $baseUrl = 'https://api.dpd.ro/v1';
 
+    /**
+     * @var int Timeout in seconds
+     */
+    protected $timeout = 3;
+
+    /**
+     * @param $path
+     * @param $method
+     * @param $payload
+     *
+     * @return \Guzzle\Http\EntityBodyInterface|string
+     * @throws \Exception
+     */
     public function call($path, $method, $payload)
     {
-//        var_dump($payload);
-
-
         $client = new Client();
 
         $request = $client->post(
@@ -32,12 +45,12 @@ class Api
                 'Content-type' => 'application/json',
                 'charset' => 'utf-8',
             ],
-            $payload
+            $payload,
+            ['timeout' => $this->timeout]
         );
 
         $response = $client->send($request);
 
-        print_r($response->getBody(true));
-        die;
+        return $response->getBody();
     }
 }

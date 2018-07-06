@@ -17,8 +17,13 @@ use Konekt\Courier\Common\CommandFactoryInterface;
 use Konekt\Courier\Common\CommandInterface;
 use Konekt\Courier\Common\RequestInterface;
 use Konekt\Courier\Dpd\ApiCredentials;
+use Konekt\Courier\Dpd\Transaction\CancelShipment\CancelShipmentCommand;
+use Konekt\Courier\Dpd\Transaction\CancelShipment\CancelShipmentRequest;
 use Konekt\Courier\Dpd\Transaction\CreateShipment\CreateShipmentCommand;
 use Konekt\Courier\Dpd\Transaction\CreateShipment\CreateShipmentRequest;
+use Konekt\Courier\Dpd\Transaction\PrintAwb\PrintCommand;
+use Konekt\Courier\Dpd\Transaction\PrintAwb\PrintRequest;
+
 /**
  * Class CommandFactory.
  *
@@ -52,6 +57,10 @@ class CommandFactory implements CommandFactoryInterface
     {
         if ($request instanceof CreateShipmentRequest) {
             $command = new CreateShipmentCommand($this->apiCredentials);
+        } elseif ($request instanceof CancelShipmentRequest) {
+            $command = new CancelShipmentCommand($this->apiCredentials);
+        } elseif ($request instanceof PrintRequest) {
+            $command = new PrintCommand($this->apiCredentials);
         } else {
             throw new Exception("No command matches request of type " . get_class($request));
         }
