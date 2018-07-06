@@ -32,7 +32,7 @@ class PrintCommand extends AbstractCommand
     public function handle(RequestInterface $request)
     {
         $requestParams = [
-            'paperSize' => "A4_4xA6",
+            'paperSize' => "A4",
             'parcels' => [
                 (object) [
                     'parcel' => (object) [

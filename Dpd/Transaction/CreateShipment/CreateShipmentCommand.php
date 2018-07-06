@@ -18,6 +18,7 @@ use Konekt\Courier\Common\ResponseInterface;
 use Konekt\Courier\Dpd\Api\Api;
 use Konekt\Courier\Dpd\Api\CreateShipment;
 use Konekt\Courier\Dpd\GenericErrorResponse;
+use Konekt\Courier\Dpd\Package;
 use Konekt\Courier\Dpd\Transaction\AbstractCommand;
 use Konekt\Courier\Common\RequestInterface;
 use Konekt\Courier\Dpd\Transaction\ErrorResponse;
@@ -33,57 +34,55 @@ class CreateShipmentCommand extends AbstractCommand
      */
     public function handle(RequestInterface $request)
     {
+        /** @var Package $package */
+        $package = $request->getPackage();
+
         $recipient = (object)[
             "phone1" => (object)[
-                "number" => "0740242854",
-                //"number" => "1234",
+                "number" => $package->recipient_phone1_number,
             ],
-            "privatePerson" => true,
-            "clientName" => "TEST",
-            "contactName" => "TEST",
-            "email" => "a@b.c",
+            "privatePerson" => $package->recipient_privatePerson,
+            "clientName" => $package->recipient_clientName,
+            "contactName" => $package->recipient_contactName,
+            "email" => $package->recipient_email,
+
+            // TODO: problem here: we don't have separate fields for the address
             "address" => (object)[
-                "siteName" => "Sibiu",
+                "siteType" => 'or.',
+                "siteName" => $package->recipient_address_siteName,
                 "streetType" => "str.",
-                "streetName" => "ACILIU",
+                "streetName" => $package->recipient_address_streetName,
+                //This is required by the API, but we have the info in streetName, so we leave it empty
                 "streetNo" => "3",
             ],
         ];
 
-        //TODO: if after 17:00, pickup is possible only the next day (error is returned if not)
-        if ((date('H') < 17)) {
-            $pickupDate = date("Y-m-d");
-        } else {
-            $pickupDate = date("Y-m-d", strtotime('tomorrow'));
-        }
+
 
         $service = (object)[
-            'pickupDate' => $pickupDate,
-            "serviceId" => 2002,
+            'pickupDate' => $package->service_pickupDate,
+            "serviceId" => $package->service_serviceId,
             "additionalServices" => (object)[
                 "declaredValue" => (object)[
-                    "amount" => 100.0,
+                    "amount" => $package->service_additionalServices_declaredValue_amount,
                 ],
-                "returns" => (object)[
-                    "rod" => (object)[
-                        "enabled" => true,
-                    ],
-                    "returnReceipt" => [
-                        "enabled" => true,
-                    ],
-                    "swap" => [
-                        "serviceId" => 2002,
-                        "parcelsCount" => 1,
-                    ],
-                ],
+
+                // "Ramburs" is set below, however API gives an error:
+                //      Eroare: COD not allowed for seller (sla.cod.cod-not-allowed-for-client)
+                // Waiting for DPD support for clarifications, commented out until then.
+
+                "cod" => (object) [
+                    "amount" => 111,
+                    "payoutToThirdParty" => true
+                ]
             ],
         ];
 
         $content = (object)[
-            "parcelsCount" => 1,
-            "totalWeight" => 20.0,
-            "contents" => "FURNITURE",
-            "package" => "BOX",
+            "parcelsCount" => $package->content_parcelsCount,
+            "totalWeight" => $package->content_totalWeight,
+            "contents" => $package->content_contents,
+            "package" => $package->content_package,
         ];
 
         $payment = (object) [
@@ -95,6 +94,9 @@ class CreateShipmentCommand extends AbstractCommand
             'service' => $service,
             'content' => $content,
             'payment' => $payment,
+
+            'shipmentNote' => $package->shipmentNote,
+            'ref1' => $package->ref1
         ];
 
         $params = array_merge(

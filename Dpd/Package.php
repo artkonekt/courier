@@ -17,5 +17,27 @@ namespace Konekt\Courier\Dpd;
  */
 class Package
 {
-    public $continut;
+    // Recipient
+    public $recipient_phone1_number;
+    public $recipient_privatePerson;
+    public $recipient_clientName;
+    public $recipient_contactName;
+    public $recipient_email;
+    public $recipient_address_siteName;
+    public $recipient_address_streetName;
+
+    // Service
+    public $service_pickupDate;
+    public $service_serviceId;
+    public $service_additionalServices_declaredValue_amount;
+
+    // Content
+    public $content_parcelsCount;
+    public $content_totalWeight;
+    public $content_contents = "FURNITURE";
+    public $content_package = "BOX";
+
+    // Other
+    public $shipmentNote;
+    public $ref1;
 }
