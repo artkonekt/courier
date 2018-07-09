@@ -18,7 +18,7 @@ use Konekt\Courier\Common\Response\StatusAwareResponseInterface;
 
 class CreateShipmentResponse implements StatusAwareResponseInterface
 {
-    /** @var string */
+    /** @var mixed */
     private $body;
 
     /**
@@ -36,6 +36,13 @@ class CreateShipmentResponse implements StatusAwareResponseInterface
         return $this->body->id;
     }
 
+    /**
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
     /**
      * Returns whether the response is a successful one.
      *

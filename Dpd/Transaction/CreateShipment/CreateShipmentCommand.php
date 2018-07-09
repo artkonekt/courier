@@ -71,10 +71,10 @@ class CreateShipmentCommand extends AbstractCommand
                 //      Eroare: COD not allowed for seller (sla.cod.cod-not-allowed-for-client)
                 // Waiting for DPD support for clarifications, commented out until then.
 
-                "cod" => (object) [
-                    "amount" => 111,
+                /*"cod" => (object) [
+                    "amount" => 111.34,
                     "payoutToThirdParty" => true
-                ]
+                ]*/
             ],
         ];
 

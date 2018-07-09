@@ -18,25 +18,25 @@ use Konekt\Courier\Common\RequestInterface;
 class PrintRequest implements RequestInterface
 {
     /**
-     * @var string
+     * @var string[]
      */
-    private $awbNumber;
+    private $parcelIds;
 
     /**
-     * @param string $awbNumber
+     * @param string[] $parcelIds
      */
-    public function __construct($awbNumber)
+    public function __construct($parcelIds)
     {
-        $this->awbNumber = $awbNumber;
+        $this->parcelIds = $parcelIds;
     }
 
     /**
-     * Returns the number of the AWB.
+     * Returns the parcel ids.
      *
      * @return mixed
      */
-    public function getAwbNumber()
+    public function getParcelIds()
     {
-        return $this->awbNumber;
+        return $this->parcelIds;
     }
 }

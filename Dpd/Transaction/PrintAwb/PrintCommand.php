@@ -31,15 +31,18 @@ class PrintCommand extends AbstractCommand
      */
     public function handle(RequestInterface $request)
     {
+        $parcels = [];
+        foreach ($request->getParcelIds() as $parcelId) {
+            $parcels[] = (object) [
+                'parcel' => (object) [
+                    'id' => $parcelId
+                ]
+            ];
+        }
+
         $requestParams = [
             'paperSize' => "A4",
-            'parcels' => [
-                (object) [
-                    'parcel' => (object) [
-                        'id' => $request->getAwbNumber()
-                    ]
-                ]
-            ]
+            'parcels' => $parcels
         ];
 
         $params = array_merge(
