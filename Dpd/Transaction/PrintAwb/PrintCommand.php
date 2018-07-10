@@ -41,7 +41,7 @@ class PrintCommand extends AbstractCommand
         }
 
         $requestParams = [
-            'paperSize' => "A4",
+            'paperSize' => "A4_4xA6",
             'parcels' => $parcels
         ];
 
