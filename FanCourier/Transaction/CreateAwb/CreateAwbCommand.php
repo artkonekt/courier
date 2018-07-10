@@ -13,7 +13,7 @@
 namespace Konekt\Courier\FanCourier\Transaction\CreateAwb;
 
 use Konekt\Courier\Common\Response\StatusAwareResponseInterface;
-use Konekt\Courier\FanCourier\Utils\StringNormalizer;
+use Konekt\Courier\Common\Utils\StringNormalizer;
 use FanCourier\fanCourier;
 use FanCourier\Plugin\csv\csvItem;
 use Konekt\Courier\Common\Exception\InvalidRequestException;

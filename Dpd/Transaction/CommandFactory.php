@@ -21,6 +21,8 @@ use Konekt\Courier\Dpd\Transaction\CancelShipment\CancelShipmentCommand;
 use Konekt\Courier\Dpd\Transaction\CancelShipment\CancelShipmentRequest;
 use Konekt\Courier\Dpd\Transaction\CreateShipment\CreateShipmentCommand;
 use Konekt\Courier\Dpd\Transaction\CreateShipment\CreateShipmentRequest;
+use Konekt\Courier\Dpd\Transaction\FindSite\FindSiteCommand;
+use Konekt\Courier\Dpd\Transaction\FindSite\FindSiteRequest;
 use Konekt\Courier\Dpd\Transaction\PrintAwb\PrintCommand;
 use Konekt\Courier\Dpd\Transaction\PrintAwb\PrintRequest;
 
@@ -61,6 +63,8 @@ class CommandFactory implements CommandFactoryInterface
             $command = new CancelShipmentCommand($this->apiCredentials);
         } elseif ($request instanceof PrintRequest) {
             $command = new PrintCommand($this->apiCredentials);
+        } elseif ($request instanceof FindSiteRequest) {
+            $command = new FindSiteCommand($this->apiCredentials);
         } else {
             throw new Exception("No command matches request of type " . get_class($request));
         }

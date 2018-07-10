@@ -16,7 +16,6 @@ namespace Konekt\Courier\Dpd\Transaction\CreateShipment;
 use Exception;
 use Konekt\Courier\Common\ResponseInterface;
 use Konekt\Courier\Dpd\Api\Api;
-use Konekt\Courier\Dpd\Api\CreateShipment;
 use Konekt\Courier\Dpd\GenericErrorResponse;
 use Konekt\Courier\Dpd\Package;
 use Konekt\Courier\Dpd\Transaction\AbstractCommand;
@@ -48,12 +47,8 @@ class CreateShipmentCommand extends AbstractCommand
 
             // TODO: problem here: we don't have separate fields for the address
             "address" => (object)[
-                "siteType" => 'or.',
-                "siteName" => $package->recipient_address_siteName,
-                "streetType" => "str.",
-                "streetName" => $package->recipient_address_streetName,
-                //This is required by the API, but we have the info in streetName, so we leave it empty
-                "streetNo" => "3",
+                "siteId" => $package->recipient_address_siteId,
+                "addressNote" => $package->recipient_address_streetName
             ],
         ];
 

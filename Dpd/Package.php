@@ -23,8 +23,12 @@ class Package
     public $recipient_clientName;
     public $recipient_contactName;
     public $recipient_email;
+
+    public $recipient_address_siteId;
     public $recipient_address_siteName;
     public $recipient_address_streetName;
+
+    public $region;
 
     // Service
     public $service_pickupDate;
