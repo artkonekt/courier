@@ -17,6 +17,10 @@ namespace Konekt\Courier\Dpd;
  */
 class Package
 {
+    // Sender
+    public $sender_clientId;
+    public $sender_phone1_number;
+
     // Recipient
     public $recipient_phone1_number;
     public $recipient_privatePerson;
@@ -34,6 +38,7 @@ class Package
     public $service_pickupDate;
     public $service_serviceId;
     public $service_additionalServices_declaredValue_amount;
+    public $service_additionalServices_cod_amount;
 
     // Content
     public $content_parcelsCount;

@@ -36,6 +36,13 @@ class CreateShipmentCommand extends AbstractCommand
         /** @var Package $package */
         $package = $request->getPackage();
 
+        $sender = (object) [
+            'clientId' => $package->sender_clientId,
+            "phone1" => (object)[
+                "number" => $package->sender_phone1_number,
+            ]
+        ];
+
         $recipient = (object)[
             "phone1" => (object)[
                 "number" => $package->recipient_phone1_number,
@@ -61,15 +68,10 @@ class CreateShipmentCommand extends AbstractCommand
                 "declaredValue" => (object)[
                     "amount" => $package->service_additionalServices_declaredValue_amount,
                 ],
-
-                // "Ramburs" is set below, however API gives an error:
-                //      Eroare: COD not allowed for seller (sla.cod.cod-not-allowed-for-client)
-                // Waiting for DPD support for clarifications, commented out until then.
-
-                /*"cod" => (object) [
-                    "amount" => 111.34,
-                    "payoutToThirdParty" => true
-                ]*/
+                "cod" => (object) [
+                    "amount" => $package->service_additionalServices_cod_amount,
+                    "payoutToThirdParty" => false
+                ]
             ],
         ];
 
@@ -85,6 +87,7 @@ class CreateShipmentCommand extends AbstractCommand
         ];
 
         $requestParams = [
+            'sender' => $sender,
             'recipient' => $recipient,
             'service' => $service,
             'content' => $content,
