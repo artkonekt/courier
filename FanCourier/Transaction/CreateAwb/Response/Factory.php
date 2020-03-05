@@ -39,7 +39,7 @@ class Factory
                 $result = new GenericErrorResponse($rawApiResponse[0]);
             } elseif (0 == $parts[1]) {
                 //the API call was successful, but there are errors in the posted data
-                $result = new ErrorResponse($parts[0], $parts[2]);
+                $result = new ErrorResponse($parts[0], $value);
             } else {
                 //all is correct
                 $result = new SuccessResponse($parts[0], $parts[2], $parts[3]);
